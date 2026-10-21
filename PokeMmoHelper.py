@@ -70,6 +70,7 @@ exclusive fullscreen will cover it.
 import copy
 import ctypes
 import json
+import math
 import os
 import queue
 import re
@@ -87,7 +88,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 GITHUB_REPO = "Juovitus/PokeMmoHelper"
-VERSION = "v41"
+VERSION = "v42"
 
 # Keep data files next to the .exe when packaged, or next to the script.
 if getattr(sys, "frozen", False):
@@ -903,8 +904,8 @@ def clean_step(text, prev="", auto_encore=True):
                   lambda m: "(" + re.sub(r"\s+needed\b", "", m.group(1),
                                          flags=re.I) + ")", text)
     text = re.sub(r"\(([a-z])", lambda m: "(" + m.group(1).upper(), text)
-    text = re.sub(r"\bStay(?:s)?(?: in| on the field)?"
-                  r"(?: \((?:Don't|Do not|No) switch\))?",
+    text = re.sub(r"\bStay(?:s|ed)?\b(?: in| on the field)?"
+                  r"(?: \((?:Don't|Do not|Doesn't|No) switch\))?",
                   "Didn't Switch", text, flags=re.I)
     text = re.sub(r"^[Tt]o (?=[A-Z])", "Switch to ", text)
     # Gengar boosts: say Encore first (unless it is already covered)
@@ -1111,6 +1112,42 @@ def load_berry_plants():
         except Exception:
             continue
     return plants
+
+
+def pin_image(color, angle, bg=BAR, size=16):
+    """A pushpin icon drawn pixel by pixel (no image files needed), tilted by
+    `angle` degrees and blended onto `bg` so its edges look smooth."""
+    def rgb(hex_color):
+        return [int(hex_color[i:i + 2], 16) for i in (1, 3, 5)]
+
+    def inside(x, y):
+        # Pin pointing down, centred on (0, 0), in pixels.
+        return ((-4 <= x <= 4 and -7 <= y <= -5)          # cap
+                or (-2.5 <= x <= 2.5 and -5 <= y <= 0)    # body
+                or (-5 <= x <= 5 and 0 <= y <= 1.5)       # collar
+                or (-0.7 <= x <= 0.7 and 1.5 <= y <= 7.5))  # needle
+
+    fg_rgb, bg_rgb = rgb(color), rgb(bg)
+    cos_a = math.cos(math.radians(angle))
+    sin_a = math.sin(math.radians(angle))
+    samples = [(i + 0.5) / 3 for i in range(3)]
+    image = tk.PhotoImage(width=size, height=size)
+    rows = []
+    for py in range(size):
+        row = []
+        for px in range(size):
+            hits = 0
+            for sy in samples:
+                for sx in samples:
+                    dx, dy = px + sx - size / 2, py + sy - size / 2
+                    hits += inside(dx * cos_a + dy * sin_a,
+                                   -dx * sin_a + dy * cos_a)
+            mix = hits / 9
+            row.append("#%02x%02x%02x" % tuple(
+                round(b + (f - b) * mix) for f, b in zip(fg_rgb, bg_rgb)))
+        rows.append("{" + " ".join(row) + "}")
+    image.put(" ".join(rows))
+    return image
 
 
 def canvas_size(canvas, default_w, default_h):
@@ -1837,19 +1874,26 @@ class GuideView:
         self.grid([(g["name"], lambda g=g: self.pick_group(g))
                    for g in data.get("groups", [])], 3, trainers=True)
 
+    def restart_button(self, parent, text, colors=("#5a3b1c", "#ffcf8a",
+                                                   "#7a5226")):
+        """A bordered button that goes back to the champion list. `colors`
+        is (background, text, hover background); orange by default."""
+        bg, fg, active = colors
+        frame = tk.Frame(parent, bg=BUTTON_BORDER)
+        tk.Button(frame, text=text, command=self.restart,
+                  bg=bg, fg=fg, bd=0, relief="flat",
+                  activebackground=active, activeforeground="#ffffff",
+                  font=("Segoe UI", 8, "bold"), padx=8, pady=2,
+                  cursor="hand2").pack(padx=1, pady=1)
+        return frame
+
     def nav_bar(self):
         bar = tk.Frame(self.frame, bg=BG)
         bar.pack(fill="x", pady=(2, 2))
         back = tk.Frame(bar, bg=BUTTON_BORDER)
         self.button(back, "‹ Back", self.back).pack(padx=1, pady=1)
         back.pack(side="left")
-        again = tk.Frame(bar, bg=BUTTON_BORDER)
-        tk.Button(again, text="↺ Restart", command=self.restart,
-                  bg="#5a3b1c", fg="#ffcf8a", bd=0, relief="flat",
-                  activebackground="#7a5226", activeforeground="#ffffff",
-                  font=("Segoe UI", 8, "bold"), padx=8, pady=2,
-                  cursor="hand2").pack(padx=1, pady=1)
-        again.pack(side="left", padx=4)
+        self.restart_button(bar, "↺ Restart").pack(side="left", padx=4)
         crumbs = [self.group["name"]] + [label for label, _ in self.trail]
         row = tk.Frame(self.frame, bg=BG)
         row.pack(fill="x")
@@ -1906,8 +1950,9 @@ class GuideView:
                         lambda o=o: self.pick_step(o["label"], o["nodeId"]))
                        for o in branch.get("options", [])], 2)
         else:
-            self.text(self.frame, "End of guide for this lead.", DIM,
-                      ("Segoe UI", 8, "italic"), pady=(6, 0))
+            self.restart_button(self.frame, "✓ Fight finished",
+                                ("#1f4d2c", "#9be7a8", "#2e6b3e")).pack(
+                anchor="w", pady=(6, 0))
 
 
 # ----------------------------------------------------------------- the app
@@ -2279,15 +2324,19 @@ class Overlay:
             bd=0, bg="#2e9e4f", fg="#ffffff", activebackground="#3cb862",
             activeforeground="#ffffff", font=("Segoe UI", 8, "bold"),
             cursor="hand2", padx=6)
+        # Pinned: an upright pin stuck in. Unpinned: a loose, tilted pin.
+        self.pin_images = {True: pin_image(ACCENT, 0),
+                           False: pin_image(AMBER, 45)}
         self.pin_button = tk.Button(self.bar_frame, command=self.toggle_pin,
-                                    bd=0, bg=BAR, activebackground=BG,
-                                    font=("Segoe UI", 8), cursor="hand2")
+                                    bd=0, bg=BAR, activebackground=BAR,
+                                    cursor="hand2", padx=4)
         self.pin_button.pack(side="right")
         self.update_pin_button()
         # Berry progress bar beside the page title, plus a water-drop alert.
+        # Packed by update_title_progress only while berries are planted.
         self.title_bar = tk.Canvas(self.bar_frame, width=90, height=14,
                                    bg=TRACK, highlightthickness=0, bd=0)
-        self.title_bar.pack(side="left", padx=(4, 0))
+        self.title_bar_shown = False
         self.drop_image = tk.PhotoImage(data=DROP_PNG)
         self.alert_label = tk.Label(self.bar_frame, image=self.drop_image,
                                     bg=BAR)
@@ -2379,14 +2428,8 @@ class Overlay:
         self.ui_changed()
 
     def update_pin_button(self):
-        if self.pinned:
-            self.pin_button.config(text="Unpin", fg=ACCENT,
-                                   activeforeground=ACCENT)
-            cursor = ""
-        else:
-            self.pin_button.config(text="Pin", fg=AMBER,
-                                   activeforeground=AMBER)
-            cursor = "fleur"
+        self.pin_button.config(image=self.pin_images[self.pinned])
+        cursor = "" if self.pinned else "fleur"
         self.bar_frame.config(cursor=cursor)
 
     def make_check(self, parent, var, command):
@@ -2779,6 +2822,13 @@ class Overlay:
         if state == self._title_state:
             return
         self._title_state = state
+        if stats and not self.title_bar_shown:
+            self.title_bar.pack(side="left", padx=(4, 0),
+                                after=self.title_label)
+            self.title_bar_shown = True
+        elif not stats and self.title_bar_shown:
+            self.title_bar.pack_forget()
+            self.title_bar_shown = False
         draw_bar(self.title_bar, fraction, color, text, default_w=90,
                  default_h=14, notches=notches)
         if alert and not self.alert_shown:
