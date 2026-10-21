@@ -88,7 +88,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 GITHUB_REPO = "Juovitus/PokeMmoHelper"
-VERSION = "v42"
+VERSION = "v43"
 
 # Keep data files next to the .exe when packaged, or next to the script.
 if getattr(sys, "frozen", False):
@@ -879,7 +879,7 @@ def find_mentions(text):
     return found
 
 
-def clean_step(text, prev="", auto_encore=True):
+def clean_step(text, prev="", auto_encore=True, nxt=""):
     """Tidy guide text: one kind of bracket, no doubled brackets or spaces,
     consistent wording ("Sp.Atk", "(No Encore)"), and Encore shown first
     wherever Gengar is told to boost."""
@@ -908,14 +908,33 @@ def clean_step(text, prev="", auto_encore=True):
                   r"(?: \((?:Don't|Do not|Doesn't|No) switch\))?",
                   "Didn't Switch", text, flags=re.I)
     text = re.sub(r"^[Tt]o (?=[A-Z])", "Switch to ", text)
-    # Gengar boosts: say Encore first (unless it is already covered)
+    # several team numbers means it isn't known yet
+    text = re.sub(r"\bOpponent is using team(?= \d+\s*,)",
+                  "Opponent could be using team", text)
+    # Gengar boosts: say Encore first (unless it is already covered, or the
+    # next step says no Encore is needed)
+    def encore_first(text):
+        # "Switch to Gengar +4" -> "Switch to Gengar, Encore, then +4"
+        if re.search(r"\bto Gengar \+\d", text):
+            return re.sub(r"\bto Gengar (?=\+\d)", "to Gengar, Encore, then ",
+                          text, 1)
+        # a line that starts with the boost: "Encore, then +4 Sp.Atk"
+        # (the Gengar picture shows who); mid-sentence keeps the name
+        if re.match(r"Gengar \+\d", text):
+            return re.sub(r"^Gengar (?=\+\d)", "Encore, then ", text, 1)
+        return re.sub(r"Gengar(?= \+\d)", "Encore, then Gengar", text, 1)
+
     if auto_encore and re.search(r"Gengar \+\d", text) and not re.search(
-            r"encore", text + " " + prev, re.I):
-        text = re.sub(r"Gengar(?= \+\d)", "Encore, then Gengar", text, 1)
+            r"encore", text + " " + prev, re.I) and not re.search(
+            r"no Encore", nxt, re.I):
+        text = encore_first(text)
     elif auto_encore and re.search(r"Gengar \+\d", text) and re.search(
             r"\s*\+?\s*use Encore\b", text, re.I):
+        # "Gengar +4 Sp.Atk + use Encore": Encore, boost, then Encore again
         text = re.sub(r"\s*\+?\s*use Encore\b", "", text, flags=re.I)
-        text = re.sub(r"Gengar(?= \+\d)", "Encore, then Gengar", text, 1)
+        if not re.search(r"encore", prev, re.I):
+            text = encore_first(text)
+        text += ", then Encore again"
     # spacing / punctuation
     text = re.sub(r"\s+([,.;:!?)%])", r"\1", text)
     text = re.sub(r"\(\s+", "(", text)
@@ -1148,6 +1167,33 @@ def pin_image(color, angle, bg=BAR, size=16):
         rows.append("{" + " ".join(row) + "}")
     image.put(" ".join(rows))
     return image
+
+
+def flat_button(parent, text, command, bg, fg, hover_bg, hover_fg=None,
+                **options):
+    """A Label that works like a flat button. Native Windows buttons flash
+    white for a moment when created, which shows every time the guide is
+    rebuilt; a Label is drawn by Tk in its own colours straight away."""
+    hover_fg = hover_fg or fg
+    label = tk.Label(parent, text=text, bg=bg, fg=fg, bd=0, cursor="hand2",
+                     **options)
+
+    def enter(_event):
+        label.config(bg=hover_bg, fg=hover_fg)
+
+    def leave(_event):
+        label.config(bg=bg, fg=fg)
+
+    def release(event):
+        # like a real button: only fires if released over it
+        if (0 <= event.x < label.winfo_width()
+                and 0 <= event.y < label.winfo_height()):
+            command()
+
+    label.bind("<Enter>", enter)
+    label.bind("<Leave>", leave)
+    label.bind("<ButtonRelease-1>", release)
+    return label
 
 
 def canvas_size(canvas, default_w, default_h):
@@ -1571,6 +1617,72 @@ def load_e4_guide(root, team_id, guide_id):
     return _E4_CACHE[key]
 
 
+E4_TRAINER_ALIASES = {"Gary": "Blue"}
+
+
+def load_e4_opponents(root, guide_id, trainer):
+    """The trainer's numbered teams from e4/opponents.json:
+    [{"team": n, "pokemon": [{"pokemon", "ability", "item", "moves"}]}]."""
+    key = ("opponents", str(root))
+    if key not in _E4_CACHE:
+        raw = load_json(root / "opponents.json", {})
+        _E4_CACHE[key] = raw.get("regions", {}) if isinstance(raw, dict) else {}
+    region = guide_id.split("_", 1)[-1].title()
+    trainers = _E4_CACHE[key].get(region) or {}
+    for name in (trainer, f"{trainer} ({region})",
+                 E4_TRAINER_ALIASES.get(trainer)):
+        if name and isinstance(trainers.get(name), list):
+            return trainers[name]
+    return []
+
+
+TEAM_LINE_RE = re.compile(r"^Opponent (?:is|could be) using team", re.I)
+SEND_OUT_RE = re.compile(r"^→|\b(?:comes out|comes in|sends out)\b",
+                         re.I)
+
+
+def team_lines_first(steps):
+    """Move each "Opponent is using team N" line up to just under the step
+    where the opponent sent something out (or to the top of the section, the
+    heading being what was sent out), so it is read before the moves."""
+    out = []
+    for kind, text in steps:
+        if not TEAM_LINE_RE.match(text):
+            out.append((kind, text))
+            continue
+        spot = 0
+        for index, (_kind, earlier) in enumerate(out):
+            if SEND_OUT_RE.search(earlier):
+                spot = index + 1
+        out.insert(spot, (kind, text))
+    return out
+
+
+def current_label(group, nodes, trail, node_id, saved_label):
+    """The button text that leads to node_id, from the guide as it is now
+    (saved progress keeps the old text, which goes stale when a label is
+    corrected)."""
+    if not trail:
+        options = group.get("entries", [])
+    else:
+        branch = resolve_node(nodes, trail[-1][1])[1] or {}
+        options = branch.get("options", [])
+    for option in options:
+        if option.get("nodeId") == node_id and option.get("label"):
+            return option["label"]
+    return str(saved_label)
+
+
+def possible_teams(texts):
+    """Team numbers from the last "Opponent is using team 1, 4" line."""
+    found = None
+    for text in texts:
+        m = re.search(r"using team ([\d,\s]+)", text)
+        if m:
+            found = {int(n) for n in re.findall(r"\d+", m.group(1))}
+    return found
+
+
 def resolve_node(nodes, node_id):
     """Follow automatic 'goto' links. Returns (steps, choice_branch|None)."""
     steps, seen, branch = [], set(), None
@@ -1600,6 +1712,8 @@ class GuideView:
         self.group = None      # chosen champion (a dict from the guide)
         self.trail = []        # [(label, node_id), ...] choices made so far
         self.menu_open = False
+        self.teams_open = False  # the trainer's team list (accordion)
+        self.root = None         # folder with the Elite Four data
         self.rendered = False
         saved = (app.ui_guides or {}).get(guide_id)
         self.pending = saved if isinstance(saved, dict) else None
@@ -1664,17 +1778,19 @@ class GuideView:
         return label
 
     def button(self, parent, text, command, fg=FG, wrap=0):
-        return tk.Button(parent, text=text, command=command, bg=BAR, fg=fg,
-                         bd=0, relief="flat", activebackground=HOVER,
-                         activeforeground=fg, font=("Segoe UI", 8),
-                         padx=6, pady=2, cursor="hand2", wraplength=wrap,
-                         justify="left", highlightthickness=0)
+        return flat_button(parent, text, command, BAR, fg, HOVER,
+                           font=("Segoe UI", 8), padx=6, pady=2,
+                           wraplength=wrap, justify="left")
 
     def rich(self, text, fg, font, pady=0):
         """A line of text with the pictures of the Pokemon and items it
-        names shown beside it."""
-        text = clean_step(text)
+        names shown beside it. Steps arrive already cleaned (with the step
+        before them in mind), so don't add "Encore, then" a second time."""
+        text = clean_step(text, auto_encore=False)
         marks = find_mentions(text)[:4]
+        if (not marks and getattr(self, "has_gengar", False)
+                and re.match(r"\W*Encore\b", text)):
+            marks = [("pokemon", "gengar")]   # Gengar is the one with Encore
         if not marks:
             return self.text(self.frame, text, fg, font, pady)
         row = tk.Frame(self.frame, bg=BG)
@@ -1768,11 +1884,24 @@ class GuideView:
         refit()
 
     def render(self):
+        # Rebuilding changes the page height, which can move the view; keep
+        # it where it was (applied when the new layout is measured, before
+        # it is drawn, so nothing flashes).
+        if self.rendered:
+            self.app.hold_scroll(self.app.canvas.canvasy(0))
+            self.app.freeze_body()
+        try:
+            self.build()
+        finally:
+            # after the layout work queued by build() has run
+            self.app.root.after_idle(self.app.thaw_body)
+
+    def build(self):
         self.rendered = True
         for child in self.frame.winfo_children():
             child.destroy()
         self.app.prune_wrap()
-        root = find_e4_root(self.app.config)
+        root = self.root = find_e4_root(self.app.config)
         if root is None:
             self.text(self.frame,
                       "Elite Four guide data not found. Rebuild the exe with "
@@ -1789,6 +1918,7 @@ class GuideView:
             return
         team_id = self.app.e4_team(teams, default)
         team = next(t for t in teams if t["id"] == team_id)
+        self.has_gengar = "Gengar" in team.get("pokemon", [])
         self.team_header(teams, team)
         data = load_e4_guide(root, team_id, self.guide_id)
         if data is None:
@@ -1807,7 +1937,9 @@ class GuideView:
                 for pair in saved.get("trail") or []:
                     if (isinstance(pair, list) and len(pair) == 2
                             and pair[1] in nodes):
-                        trail.append((str(pair[0]), pair[1]))
+                        trail.append((current_label(group, nodes, trail,
+                                                    pair[1], pair[0]),
+                                      pair[1]))
                     else:
                         break
                 self.trail = trail
@@ -1867,8 +1999,15 @@ class GuideView:
 
     def render_champions(self, data):
         if data.get("warning"):
-            self.text(self.frame, data["warning"], AMBER,
-                      ("Segoe UI", 8, "italic"), pady=(0, 4))
+            # the Exp. Amplifier reminder goes first, in red
+            lines = [l for l in data["warning"].splitlines() if l.strip()]
+            urgent = [l for l in lines if re.search(r"Exp\.? Amplifier", l)]
+            rest = [l for l in lines if l not in urgent]
+            for text, color in (("\n".join(urgent), RED),
+                                ("\n".join(rest), AMBER)):
+                if text:
+                    self.text(self.frame, text, color,
+                              ("Segoe UI", 8, "italic"), pady=(0, 4))
         self.text(self.frame, data.get("groupPrompt") or "Choose the champion:",
                   DIM, ("Segoe UI", 8))
         self.grid([(g["name"], lambda g=g: self.pick_group(g))
@@ -1880,14 +2019,12 @@ class GuideView:
         is (background, text, hover background); orange by default."""
         bg, fg, active = colors
         frame = tk.Frame(parent, bg=BUTTON_BORDER)
-        tk.Button(frame, text=text, command=self.restart,
-                  bg=bg, fg=fg, bd=0, relief="flat",
-                  activebackground=active, activeforeground="#ffffff",
-                  font=("Segoe UI", 8, "bold"), padx=8, pady=2,
-                  cursor="hand2").pack(padx=1, pady=1)
+        flat_button(frame, text, self.restart, bg, fg, active, "#ffffff",
+                    font=("Segoe UI", 8, "bold"), padx=8,
+                    pady=2).pack(padx=1, pady=1)
         return frame
 
-    def nav_bar(self):
+    def nav_bar(self, possible=None):
         bar = tk.Frame(self.frame, bg=BG)
         bar.pack(fill="x", pady=(2, 2))
         back = tk.Frame(bar, bg=BUTTON_BORDER)
@@ -1906,6 +2043,77 @@ class GuideView:
         self.app.wrap_labels.append(crumb)
         self.app.wrap_off[crumb] = 32
         crumb.config(wraplength=max(60, self.app.current_wrap() - 32))
+        self.team_list(possible)
+
+    def toggle_teams(self):
+        self.teams_open = not self.teams_open
+        self.later()
+
+    def team_list(self, possible):
+        """Accordion under the trainer: every team they can use, with each
+        Pokemon's item, ability and moves. Teams the guide has ruled out are
+        dimmed."""
+        teams = load_e4_opponents(self.root, self.guide_id,
+                                  self.group["name"])
+        if not teams:
+            return
+        arrow = "▾" if self.teams_open else "▸"
+        header = tk.Label(self.frame, bg=BG, fg=ACCENT, cursor="hand2",
+                          text=f"{arrow} {self.group['name']}'s teams "
+                               f"({len(teams)})",
+                          font=("Segoe UI", 8, "bold"), anchor="w")
+        header.pack(fill="x", pady=(2, 0))
+        header.bind("<Button-1>", lambda e: self.toggle_teams())
+        if not self.teams_open:
+            return
+        for team in teams:
+            live = possible is None or team.get("team") in possible
+            card = tk.Frame(self.frame, bg=BUTTON_BORDER)
+            card.pack(fill="x", pady=(4, 0))
+            inner = tk.Frame(card, bg=BAR, padx=6, pady=4)
+            inner.pack(fill="x", padx=1, pady=1)
+            title = tk.Frame(inner, bg=BAR)
+            title.pack(fill="x")
+            tk.Label(title, text=f"Team {team.get('team')}", bg=BAR,
+                     fg=ACCENT if live else DIM,
+                     font=("Segoe UI", 9, "bold")).pack(side="left")
+            if possible is not None:
+                tk.Label(title, text="possible" if live else "ruled out",
+                         bg=BAR, fg=CHECK_GREEN if live else DIM,
+                         font=("Segoe UI", 8)).pack(side="left", padx=6)
+            for mon in team.get("pokemon", []):
+                self.team_member(inner, mon, live)
+
+    def team_member(self, parent, mon, live):
+        row = tk.Frame(parent, bg=BAR)
+        row.pack(fill="x", pady=(3, 0))
+        # fixed 32x32 slot, so a picture arriving late doesn't move the row
+        slot = tk.Frame(row, bg=BAR, width=32, height=32)
+        slot.pack_propagate(False)
+        slot.pack(side="left", anchor="n", padx=(0, 6))
+        pic = tk.Label(slot, bg=BAR, bd=0)
+        pic.pack(fill="both", expand=True)
+        self.picture(pic, "pokemon", mon.get("pokemon", ""), 3)
+        info = tk.Frame(row, bg=BAR)
+        info.pack(side="left", fill="x", expand=True)
+        top = tk.Frame(info, bg=BAR)
+        top.pack(fill="x")
+        tk.Label(top, text=mon.get("pokemon", ""), bg=BAR,
+                 fg=FG if live else DIM,
+                 font=("Segoe UI", 9, "bold")).pack(side="left")
+        if mon.get("item"):
+            tk.Label(top, text=mon["item"], bg=BAR, fg=ORANGE,
+                     font=("Segoe UI", 8, "bold")).pack(side="left", padx=6)
+        if mon.get("ability"):
+            tk.Label(info, text=mon["ability"], bg=BAR, fg=CHECK_GREEN,
+                     font=("Segoe UI", 8), anchor="w").pack(fill="x")
+        moves = tk.Label(info, text=" · ".join(mon.get("moves", [])),
+                         bg=BAR, fg=DIM, font=("Segoe UI", 8),
+                         justify="left", anchor="w")
+        moves.pack(fill="x")
+        self.app.wrap_labels.append(moves)
+        self.app.wrap_off[moves] = 60
+        moves.config(wraplength=max(60, self.app.current_wrap() - 60))
 
     def render_leads(self):
         self.nav_bar()
@@ -1916,7 +2124,9 @@ class GuideView:
 
     def render_steps(self, data):
         nodes = data["nodes"]
-        self.nav_bar()
+        self.nav_bar(possible_teams(
+            text for _label, node_id in self.trail
+            for _kind, text in tidy_steps(resolve_node(nodes, node_id)[0])))
         branch = None
         last = len(self.trail) - 1
         for index, (label, node_id) in enumerate(self.trail):
@@ -1926,9 +2136,13 @@ class GuideView:
             head_color = ORANGE if index == 0 else ACCENT
             self.rich(f"▸ {label}", head_color,
                       ("Segoe UI", 9, "bold"), pady=(4, 0))
-            for kind, raw in tidy_steps(steps):
-                text = clean_step(raw, prev)
+            tidy = list(tidy_steps(steps))
+            shown = []
+            for pos, (kind, raw) in enumerate(tidy):
+                nxt = tidy[pos + 1][1] if pos + 1 < len(tidy) else ""
+                shown.append((kind, clean_step(raw, prev, nxt=nxt)))
                 prev = raw
+            for kind, text in team_lines_first(shown):
                 if kind != "setup" and SWITCH_RE.match(text):
                     # a switch YOU have to make: stands out in cyan
                     self.rich(f"\u21c4 {text}", SWITCH,
@@ -2032,6 +2246,10 @@ class Overlay:
         self._press = (0, 0)
         self._resize_origin = (0, 0)
         self._grab = 0.0
+        self._hold_top = None       # see hold_scroll
+        self._hold_job = None
+        self._thaw_job = None       # see freeze_body
+        self._thawing = False
 
         root.overrideredirect(True)
         root.attributes("-topmost", True)
@@ -2186,7 +2404,69 @@ class Overlay:
         self.root.bind_all("<MouseWheel>", self.on_wheel)
 
     def on_body_configure(self, _event):
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        box = self.canvas.bbox("all")
+        self.canvas.configure(scrollregion=box)
+        if self._hold_top is not None and box:
+            # Keep the held position, or the nearest one the content allows
+            # (Tk clamps it, e.g. to the top once everything fits). The page
+            # passes through in-between sizes while it is rebuilt, so the
+            # held value itself is kept rather than clamped.
+            height = max(1, box[3] - box[1])
+            self.canvas.yview_moveto(
+                max(0.0, self._hold_top - box[1]) / height)
+
+    def hold_scroll(self, top):
+        """Keep content pixel `top` at the top of the view while the content
+        is rebuilt and re-measured (pictures can arrive a moment later)."""
+        self._hold_top = top
+        if self._hold_job is not None:
+            self.root.after_cancel(self._hold_job)
+        self._hold_job = self.root.after(400, self.release_scroll)
+
+    def freeze_body(self):
+        """Stop Windows drawing the scroll area while the guide is rebuilt;
+        thaw_body then shows the finished result in one go."""
+        if not IS_WIN or self._thaw_job is not None:
+            return
+        try:
+            ctypes.windll.user32.SendMessageW(
+                self.canvas.winfo_id(), 0x000B, 0, 0)  # WM_SETREDRAW off
+        except Exception:
+            return
+        # safety net, scheduled before anything else can fail
+        self._thaw_job = self.root.after(1000, self.thaw_body)
+
+    def thaw_body(self):
+        """Lay out the rebuilt content while still hidden, then repaint it
+        all at once."""
+        if self._thaw_job is None or self._thawing:
+            return
+        self._thawing = True
+        try:
+            # finish the layout, including the resize events it queues
+            # (they set the scroll area and position), while still hidden
+            for _ in range(3):
+                self.root.update()
+            self.on_body_configure(None)
+            self.root.update_idletasks()
+        except Exception:
+            pass
+        self.root.after_cancel(self._thaw_job)
+        self._thaw_job = None
+        self._thawing = False
+        try:
+            hwnd = self.canvas.winfo_id()
+            ctypes.windll.user32.SendMessageW(hwnd, 0x000B, 1, 0)
+            # RDW_INVALIDATE | RDW_ALLCHILDREN | RDW_UPDATENOW
+            ctypes.windll.user32.RedrawWindow(hwnd, None, None,
+                                              0x0001 | 0x0080 | 0x0100)
+        except Exception:
+            pass
+
+    def release_scroll(self):
+        if self._hold_job is not None:
+            self.root.after_cancel(self._hold_job)
+        self._hold_top = self._hold_job = None
 
     @staticmethod
     def wrap_for(width):
@@ -2250,6 +2530,7 @@ class Overlay:
         self.vbar.create_rectangle(2, y1, 8, y2, fill=DIM, width=0)
 
     def bar_press(self, event):
+        self.release_scroll()
         height = max(1, self.vbar.winfo_height())
         first, last = self.canvas.yview()
         pos = event.y / height
@@ -2266,6 +2547,7 @@ class Overlay:
     def on_wheel(self, event):
         if self.collapsed:
             return
+        self.release_scroll()   # the user is scrolling: stop holding
         first, last = self.canvas.yview()
         if first <= 0.0 and last >= 1.0:
             return
@@ -2859,6 +3141,8 @@ class Overlay:
             self.set_done(ckey, value)
             self.set_closed(ckey, value)  # done -> hidden, undone -> open
         self.save()
+        if value:
+            self.collapse(key)   # finished: fold it away (can be reopened)
         self.refresh_view()
 
     def on_child(self, task, item):
@@ -2866,11 +3150,20 @@ class Overlay:
         value = self.vars[ckey].get()
         self.set_done(ckey, value)
         self.set_closed(ckey, value)      # done -> hidden, undone -> open
+        key = self.tkey(task)
+        was_done = key in self.done
         all_done = all(self.ckey(task, it) in self.done
                        for it in task["items"])
-        self.set_done(self.tkey(task), all_done)
+        self.set_done(key, all_done)
         self.save()
+        if all_done and not was_done:
+            self.collapse(key)   # the last item finished the section
         self.refresh_view()
+
+    def collapse(self, key):
+        rec = self.rows.get(key)
+        if key in self.expanded and rec and rec.get("items") is not None:
+            self.toggle_expand(key)
 
     def toggle_expand(self, key):
         self.ui_changed()
