@@ -88,7 +88,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 GITHUB_REPO = "Juovitus/PokeMmoHelper"
-VERSION = "v43"
+VERSION = "v44"
 
 # Keep data files next to the .exe when packaged, or next to the script.
 if getattr(sys, "frozen", False):
@@ -908,6 +908,12 @@ def clean_step(text, prev="", auto_encore=True, nxt=""):
                   r"(?: \((?:Don't|Do not|Doesn't|No) switch\))?",
                   "Didn't Switch", text, flags=re.I)
     text = re.sub(r"^[Tt]o (?=[A-Z])", "Switch to ", text)
+    # the opponent's Pokemon coming in: "Enemy sends out X"
+    text = re.sub(r"^→\s*(.+?)\s+(?:comes|came) (?:out|in)\b\s*",
+                  r"Enemy sends out \1 ", text).rstrip()
+    text = re.sub(r"^→\s*sends out\s*$", "Enemy sends out a new Pokémon",
+                  text)
+    text = re.sub(r"^→\s*sends out\b\s*", "Enemy sends out ", text)
     # several team numbers means it isn't known yet
     text = re.sub(r"\bOpponent is using team(?= \d+\s*,)",
                   "Opponent could be using team", text)
@@ -1658,6 +1664,19 @@ def team_lines_first(steps):
     return out
 
 
+def is_pokemon_label(label):
+    """True for a choice that is just the opponent's Pokemon ("Lucario",
+    "Mandibuzz / Spiritomb")."""
+    parts = [p for p in re.split(r"\s*/\s*", str(label).strip()) if p]
+    if not parts:
+        return False
+    for part in parts:
+        m = MENTION_RE.fullmatch(part)
+        if not m or MENTIONS[m.group(1)][0] != "pokemon":
+            return False
+    return True
+
+
 def current_label(group, nodes, trail, node_id, saved_label):
     """The button text that leads to node_id, from the guide as it is now
     (saved progress keeps the old text, which goes stale when a label is
@@ -1759,9 +1778,29 @@ class GuideView:
     def back(self):
         if self.trail:
             self.trail.pop()
+            # steps that were followed automatically go too, or Back would
+            # just follow them again
+            while self.trail and self.only_option(self.trail[-1][1]):
+                self.trail.pop()
         else:
             self.group = None
         self.later()
+
+    def only_option(self, node_id):
+        """The single option of a choice that has just one, else None."""
+        branch = resolve_node(getattr(self, "nodes", {}), node_id)[1] or {}
+        options = branch.get("options", [])
+        return options[0] if len(options) == 1 else None
+
+    def follow_only_options(self):
+        """A "choice" with one possible answer isn't a choice: take it."""
+        seen = {node_id for _label, node_id in self.trail}
+        while self.trail:
+            option = self.only_option(self.trail[-1][1])
+            if option is None or option["nodeId"] in seen:
+                break
+            self.trail.append((option["label"], option["nodeId"]))
+            seen.add(option["nodeId"])
 
     def restart(self):
         self.group, self.trail = None, []
@@ -2044,6 +2083,9 @@ class GuideView:
         self.app.wrap_off[crumb] = 32
         crumb.config(wraplength=max(60, self.app.current_wrap() - 32))
         self.team_list(possible)
+        # a clear line between the trainer's info and the guide steps
+        tk.Frame(self.frame, height=2, bg=BUTTON_BORDER).pack(
+            fill="x", pady=(8, 4))
 
     def toggle_teams(self):
         self.teams_open = not self.teams_open
@@ -2123,18 +2165,29 @@ class GuideView:
                    for e in self.group.get("entries", [])], 3)
 
     def render_steps(self, data):
-        nodes = data["nodes"]
+        nodes = self.nodes = data["nodes"]
+        self.follow_only_options()
         self.nav_bar(possible_teams(
             text for _label, node_id in self.trail
             for _kind, text in tidy_steps(resolve_node(nodes, node_id)[0])))
         branch = None
         last = len(self.trail) - 1
+        # Only the latest choice is shown (plus anything followed
+        # automatically after it); earlier steps are hidden. The breadcrumb
+        # keeps the path and Back steps back through it.
+        first = last
+        while first > 0 and self.only_option(self.trail[first - 1][1]):
+            first -= 1
         for index, (label, node_id) in enumerate(self.trail):
+            if index < first:
+                continue
             steps, branch = resolve_node(nodes, node_id)
             prev = ""
             current = index == last
             head_color = ORANGE if index == 0 else ACCENT
-            self.rich(f"▸ {label}", head_color,
+            heading = (f"Enemy sends out {label}" if is_pokemon_label(label)
+                       else label)
+            self.rich(f"▸ {heading}", head_color,
                       ("Segoe UI", 9, "bold"), pady=(4, 0))
             tidy = list(tidy_steps(steps))
             shown = []
