@@ -88,7 +88,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 GITHUB_REPO = "Juovitus/PokeMmoHelper"
-VERSION = "v44.1"
+VERSION = "v45"
 
 # Keep data files next to the .exe when packaged, or next to the script.
 if getattr(sys, "frozen", False):
@@ -2318,7 +2318,11 @@ class Overlay:
             self.root.after(300, lambda: self.canvas.yview_moveto(
                 saved_scroll))
         if ui.get("collapsed"):
-            self.root.after(500, self.toggle_collapse)
+            # start collapsed, so the full window never shows
+            self.collapsed = True
+            self.collapse_button.config(text="+")
+            self.content.pack_forget()
+            self.bottom.pack_forget()
 
         self.main_frame.pack(fill="both", expand=True)
         self.apply_size()
