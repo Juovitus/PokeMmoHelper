@@ -1,0 +1,83 @@
+{
+  "default": "shadow_scale",
+  "teams": [
+    {
+      "id": "shadow_scale",
+      "name": "Shadow Scale",
+      "icon": "gengar",
+      "pokemon": [
+        "Scrafty",
+        "Dragonite",
+        "Gengar",
+        "Heatran",
+        "Toxicroak",
+        "Chansey"
+      ]
+    },
+    {
+      "id": "reversed_fate",
+      "name": "Reversed Fate",
+      "icon": "pikachu",
+      "pokemon": [
+        "Jirachi",
+        "Pikachu",
+        "Chandelure",
+        "Dragonite",
+        "Gallade",
+        "Scrafty"
+      ]
+    },
+    {
+      "id": "dingxianyou",
+      "name": "Dingxianyou",
+      "icon": "volcarona",
+      "pokemon": [
+        "Chansey",
+        "Slowbro",
+        "Politoed",
+        "Gengar",
+        "Poliwrath",
+        "Volcarona"
+      ]
+    },
+    {
+      "id": "starlight",
+      "name": "Starlight",
+      "icon": "jirachi",
+      "pokemon": [
+        "Chansey",
+        "Jirachi",
+        "Gengar",
+        "Chandelure",
+        "Gallade",
+        "Dragonite"
+      ]
+    },
+    {
+      "id": "ghost_dance",
+      "name": "Ghost Dance",
+      "icon": "jellicent",
+      "pokemon": [
+        "Chansey",
+        "Gengar",
+        "Jellicent",
+        "Volcarona",
+        "Scrafty",
+        "Gliscor"
+      ]
+    },
+    {
+      "id": "sacred_inferno",
+      "name": "Sacred Inferno",
+      "icon": "volcarona",
+      "pokemon": [
+        "Chansey",
+        "Slowbro",
+        "Gengar",
+        "Volcarona",
+        "Gallade",
+        "Gliscor"
+      ]
+    }
+  ]
+}
