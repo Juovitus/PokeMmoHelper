@@ -1210,7 +1210,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -1218,17 +1218,13 @@
   "n6_mmjznbcq": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check Slowbro's status"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 6, 7"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "",
     "options": [
      {
       "label": "Slowbro alive",
@@ -1261,11 +1257,11 @@
     "prompt": "What did the opponent do / send out?",
     "options": [
      {
-      "label": "Yawned out the back-row special attacker",
+      "label": "Switched to another Pokémon",
       "nodeId": "n6_mmjzmunj"
      },
      {
-      "label": "Enemy Absol uses Sucker Punch",
+      "label": "Enemy Absol uses Night Slash",
       "nodeId": "n6_mmjznbcq"
      }
     ]
@@ -2231,7 +2227,7 @@
     "prompt": "What did the opponent do / send out?",
     "options": [
      {
-      "label": "Enemy Absol uses Sucker Punch",
+      "label": "Enemy Absol uses Night Slash",
       "nodeId": "n6_mm0yl0qv"
      },
      {
@@ -2501,7 +2497,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -2704,7 +2700,7 @@
     "prompt": "What did the opponent do / send out?",
     "options": [
      {
-      "label": "Enemy Absol uses Sucker Punch",
+      "label": "Enemy Absol uses Night Slash",
       "nodeId": "n6_mmrl2qmo"
      },
      {
@@ -8662,10 +8658,6 @@
   "n9_mm35q6z3": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Depends on the situation"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 2, 6"
     }
@@ -11300,7 +11292,7 @@
     },
     {
      "kind": "note",
-     "text": "If a crit KO'd Poliwrath: Gengar +4 +2"
+     "text": "If a crit KO'd Poliwrath: send in Gengar, Encore, then 2x Nasty Plot (+4 Sp.Atk), then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -11828,7 +11820,7 @@
     },
     {
      "kind": "note",
-     "text": "If a crit KO'd Poliwrath: Gengar +4 +2"
+     "text": "If a crit KO'd Poliwrath: send in Gengar, Encore, then 2x Nasty Plot (+4 Sp.Atk), then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -13875,7 +13867,7 @@
     },
     {
      "kind": "note",
-     "text": "If a crit KO'd Poliwrath: Gengar +4 +2"
+     "text": "If a crit KO'd Poliwrath: send in Gengar, Encore, then 2x Nasty Plot (+4 Sp.Atk), then use X Speed (+2 Speed)"
     }
    ],
    "branch": null

@@ -8006,10 +8006,6 @@
   "n3_mlmdlp8f": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Depends on the situation"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 6"
     }
@@ -14255,7 +14251,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -14415,7 +14411,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -15287,7 +15283,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -15611,7 +15607,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -15804,7 +15800,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -16090,7 +16086,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null

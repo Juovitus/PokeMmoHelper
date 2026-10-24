@@ -485,13 +485,16 @@ class GuideView:
                 shown.append((kind, clean_step(raw, prev, nxt=nxt)))
                 prev = raw
             lines = team_lines_first(shown)
+            # the guide ends here (no more choices): the Shadow Ball plan
+            # is the finish, so it gets the purple highlight
+            ends = current and not (branch or {}).get("options")
             for pos, (kind, text) in enumerate(lines):
                 if (kind == "warning" and pos
                         and lines[pos - 1][0] != "warning"):
                     continue          # shown on the step before it
                 warn = (lines[pos + 1][1] if pos + 1 < len(lines)
                         and lines[pos + 1][0] == "warning" else None)
-                if kind != "warning" and SHADOW_RE.search(text):
+                if ends and kind != "warning" and SHADOW_RE.search(text):
                     # Shadow Ball only: hard to miss
                     self.rich(f"◆ {text}", SHADOW,
                               ("Segoe UI", 10, "bold"), pady=(2, 2),
@@ -515,9 +518,11 @@ class GuideView:
                               FG if current else DIM, ("Segoe UI", 9),
                               warn=warn)
         if branch:
-            self.text(self.frame,
-                      branch.get("prompt") or "What happened?", AMBER,
-                      ("Segoe UI", 8), pady=(6, 0))
+            # an empty prompt means the buttons speak for themselves
+            prompt = branch.get("prompt")
+            if prompt != "":
+                self.text(self.frame, prompt or "What happened?", AMBER,
+                          ("Segoe UI", 8), pady=(6, 0))
             self.grid([(o["label"],
                         lambda o=o: self.pick_step(o["label"], o["nodeId"]))
                        for o in branch.get("options", [])], 2)

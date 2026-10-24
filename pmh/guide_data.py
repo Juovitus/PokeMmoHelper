@@ -155,6 +155,16 @@ def clean_step(text, prev="", auto_encore=True, nxt=""):
     text = re.sub(r"(?:(?<=^Encore, then )|(?<=Gengar )|(?<=Gengar, Encore, "
                   r"then ))\+4(?: Sp\.Atk|(?! Sp\.Atk))(?!\w)(?!\.\w)",
                   "2x Nasty Plot (+4 Sp.Atk)", text)
+    # Volcarona's +N is N Quiver Dances, which raise three stats
+    def quiver(m):
+        n = int(m.group(2))
+        dance = "Quiver Dance" if n == 1 else f"{n}x Quiver Dance"
+        lead = "Volcarona, " if m.group(1) else "Volcarona uses "
+        return f"{m.group(1) or ''}{lead}{dance} (+{n} Sp.Atk, Sp.Def, Speed)"
+    text = re.sub(r"(\bto )?\bVolcarona \+(\d)(?: Sp\.Atk)?"
+                  r"(?![\w.]| (?:Sp\.Def|Speed|Def|Atk)\b)", quiver, text)
+    text = re.sub(r"\bQuiver Dance \+1(?!\d)",
+                  "Quiver Dance (+1 Sp.Atk, Sp.Def, Speed)", text)
     # spacing / punctuation
     text = re.sub(r"\s+([,.;:!?)%])", r"\1", text)
     text = re.sub(r"\(\s+", "(", text)

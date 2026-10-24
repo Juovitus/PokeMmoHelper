@@ -8558,10 +8558,6 @@
     {
      "kind": "action",
      "text": "Volcarona +1 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {
@@ -8638,10 +8634,6 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 1"
-    },
-    {
-     "kind": "note",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {
@@ -9700,10 +9692,6 @@
      "text": "Volcarona +1 Sp.Atk"
     },
     {
-     "kind": "action",
-     "text": "Depends on the situation"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 1"
     }
@@ -10266,10 +10254,6 @@
     {
      "kind": "action",
      "text": "Volcarona +1 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {
@@ -10939,10 +10923,6 @@
     {
      "kind": "action",
      "text": "Volcarona +1 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {
@@ -14329,15 +14309,11 @@
     },
     {
      "kind": "action",
-     "text": "Click Shadow Ball"
+     "text": "Gengar uses Shadow Ball"
     },
     {
      "kind": "setup",
      "text": "Opponent is using team 5, 6, 8"
-    },
-    {
-     "kind": "note",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {

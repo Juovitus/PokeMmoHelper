@@ -6305,10 +6305,6 @@
     {
      "kind": "action",
      "text": "Gengar +2 Sp.Atk"
-    },
-    {
-     "kind": "note",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {
@@ -6837,10 +6833,6 @@
     {
      "kind": "action",
      "text": "Gengar +2 Sp.Atk"
-    },
-    {
-     "kind": "note",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {
@@ -7198,10 +7190,6 @@
     {
      "kind": "action",
      "text": "Switch to Gengar +2 Sp.Atk"
-    },
-    {
-     "kind": "note",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {
@@ -8721,10 +8709,6 @@
     {
      "kind": "action",
      "text": "Gengar +2 Sp.Atk"
-    },
-    {
-     "kind": "note",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {
@@ -9403,10 +9387,6 @@
     {
      "kind": "action",
      "text": "Gengar +2 Sp.Atk"
-    },
-    {
-     "kind": "note",
-     "text": "Depends on the situation"
     }
    ],
    "branch": {
@@ -13822,7 +13802,7 @@
     },
     {
      "kind": "note",
-     "text": "If Typhlosion's crit KO'd Poliwrath: Gengar +6 +2"
+     "text": "If Typhlosion's crit KO'd Poliwrath: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -15677,7 +15657,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -16808,7 +16788,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -17469,7 +17449,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
@@ -17623,7 +17603,7 @@
     },
     {
      "kind": "note",
-     "text": "Cheaper option: Gengar +6 +2"
+     "text": "Cheaper option: Gengar +6 Sp.Atk, then use X Speed (+2 Speed)"
     }
    ],
    "branch": null
