@@ -151,10 +151,15 @@ def clean_step(text, prev="", auto_encore=True, nxt=""):
         if not re.search(r"encore", prev, re.I):
             text = encore_first(text)
         text += ", then Encore again"
-    # Gengar's +4 Sp.Atk is two Nasty Plots
+    # Gengar's +2 / +4 / +6 Sp.Atk is one / two / three Nasty Plots
+    def nasty(m):
+        n = int(m.group(1)) // 2
+        return (("Nasty Plot" if n == 1 else f"{n}x Nasty Plot")
+                + f" (+{m.group(1)} Sp.Atk)")
     text = re.sub(r"(?:(?<=^Encore, then )|(?<=Gengar )|(?<=Gengar, Encore, "
-                  r"then ))\+4(?: Sp\.Atk|(?! Sp\.Atk))(?!\w)(?!\.\w)",
-                  "2x Nasty Plot (+4 Sp.Atk)", text)
+                  r"then ))\+([246])(?: Sp\.Atk|(?! (?:Sp\.Atk|Speed|Atk|Def|"
+                  r"Sp\.Def|Accuracy)\b))(?!\w)(?!\.\w)",
+                  nasty, text)
     # Volcarona's +N is N Quiver Dances, which raise three stats
     def quiver(m):
         n = int(m.group(2))

@@ -902,6 +902,10 @@
     },
     {
      "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
+    },
+    {
+     "kind": "action",
      "text": "Keep sweeping with Gengar"
     }
    ],
@@ -942,6 +946,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -1082,11 +1090,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -1328,6 +1332,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -1736,11 +1744,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -1798,11 +1802,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -1944,6 +1944,10 @@
     },
     {
      "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
+    },
+    {
+     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -2013,6 +2017,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -2121,6 +2129,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -3401,6 +3413,10 @@
     },
     {
      "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
+    },
+    {
+     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -3477,11 +3493,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -3569,11 +3581,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -3794,8 +3802,12 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
+     {
+      "label": "No crit",
+      "nodeId": "n23_mmf1aqfr_ok"
+     },
      {
       "label": "Crobat crit",
       "nodeId": "n23_mmf1axa9"
@@ -4609,11 +4621,11 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Poliwrath switches to Politoed and sacrifices it"
+     "text": "Send in Politoed and sacrifice it"
     },
     {
      "kind": "action",
-     "text": "Switch to Poliwrath"
+     "text": "Send in Poliwrath"
     },
     {
      "kind": "action",
@@ -4647,10 +4659,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Did a crit KO Volcarona?",
     "options": [
      {
-      "label": "Crit KO'd me",
+      "label": "No, Volcarona is fine",
+      "nodeId": "n23_mmykv7qw_ok"
+     },
+     {
+      "label": "A crit KO'd Volcarona",
       "nodeId": "n23_mmykvfdr"
      }
     ]
@@ -5215,11 +5231,11 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Poliwrath switches to Politoed and sacrifices it"
+     "text": "Send in Politoed and sacrifice it"
     },
     {
      "kind": "action",
-     "text": "Switch to Poliwrath"
+     "text": "Send in Poliwrath"
     },
     {
      "kind": "action",
@@ -5253,10 +5269,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Did a crit KO Volcarona?",
     "options": [
      {
-      "label": "Crit KO'd me",
+      "label": "No, Volcarona is fine",
+      "nodeId": "n23_mmf08dmi_ok"
+     },
+     {
+      "label": "A crit KO'd Volcarona",
       "nodeId": "n23_mnffjrze"
      }
     ]
@@ -5305,6 +5325,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -6389,10 +6413,6 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -6513,11 +6533,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -6669,11 +6685,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -6694,11 +6706,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -6926,11 +6934,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -6956,11 +6960,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -7223,11 +7223,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -7260,11 +7256,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "note",
@@ -7353,10 +7345,6 @@
     {
      "kind": "action",
      "text": "Gengar +4 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again"
     },
     {
      "kind": "action",
@@ -7511,11 +7499,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -7532,11 +7516,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -8734,11 +8714,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -8771,11 +8747,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -8944,10 +8916,6 @@
     {
      "kind": "action",
      "text": "Gengar +4 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again"
     },
     {
      "kind": "action",
@@ -9648,10 +9616,6 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -9788,49 +9752,15 @@
     ]
    }
   },
-  "n24_mquf4f2a": {
-   "steps": [
-    {
-     "kind": "action",
-     "text": "Switch to Poliwrath"
-    },
-    {
-     "kind": "action",
-     "text": "Switch to Gengar +4 Sp.Atk"
-    },
-    {
-     "kind": "note",
-     "text": "All Shadow Ball"
-    }
-   ],
-   "branch": null
-  },
-  "n24_mquf4f61": {
-   "steps": [
-    {
-     "kind": "action",
-     "text": "Switch to Poliwrath"
-    },
-    {
-     "kind": "action",
-     "text": "Switch to Gengar +4 Sp.Atk"
-    },
-    {
-     "kind": "note",
-     "text": "All Shadow Ball"
-    }
-   ],
-   "branch": null
-  },
   "n24_mquf2jth": {
    "steps": [
     {
      "kind": "action",
-     "text": "Switch to Poliwrath"
+     "text": "Send in Poliwrath"
     },
     {
      "kind": "action",
-     "text": "Poliwrath KOs it"
+     "text": "Poliwrath KOs Luxray"
     },
     {
      "kind": "action",
@@ -9838,35 +9768,42 @@
     },
     {
      "kind": "action",
-     "text": "Chansey revives Gengar"
+     "text": "Switch to Slowbro"
+    },
+    {
+     "kind": "warning",
+     "text": "Needs confirmation"
     },
     {
      "kind": "action",
-     "text": "→ Hitmonlee comes out"
+     "text": "Slowbro uses Yawn"
+    },
+    {
+     "kind": "warning",
+     "text": "Needs confirmation"
     },
     {
      "kind": "action",
-     "text": "Switch to Gengar"
+     "text": "Sacrifice Politoed"
+    },
+    {
+     "kind": "warning",
+     "text": "Needs confirmation"
     },
     {
      "kind": "action",
-     "text": "Gengar uses Shadow Ball"
+     "text": "Poliwrath Belly Drum (+6 Atk)"
+    },
+    {
+     "kind": "warning",
+     "text": "Needs confirmation"
+    },
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Poliwrath"
     }
    ],
-   "branch": {
-    "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
-    "options": [
-     {
-      "label": "KO'd it → Machamp came out",
-      "nodeId": "n24_mquf4f2a"
-     },
-     {
-      "label": "Hitmonlee switched to Machamp",
-      "nodeId": "n24_mquf4f61"
-     }
-    ]
-   }
+   "branch": null
   },
   "n24_95": {
    "steps": [
@@ -9885,10 +9822,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Did a crit KO Gengar?",
     "options": [
      {
-      "label": "Crit KO'd me",
+      "label": "No, Gengar is fine",
+      "nodeId": "n24_95_ok"
+     },
+     {
+      "label": "A crit KO'd Gengar",
       "nodeId": "n24_mquf2jth"
      }
     ]
@@ -9923,11 +9864,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -9948,11 +9885,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -10020,11 +9953,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -10041,11 +9970,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -10133,11 +10058,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -10154,11 +10075,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -10191,11 +10108,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -10258,11 +10171,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -10279,11 +10188,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -10390,6 +10295,10 @@
     {
      "kind": "action",
      "text": "Gengar +2 Sp.Atk"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     }
    ],
    "branch": {
@@ -10448,11 +10357,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -10558,6 +10463,10 @@
     {
      "kind": "action",
      "text": "Encore again, then Nasty Plot (+6 Sp.Atk)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -14579,6 +14488,10 @@
     },
     {
      "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
+    },
+    {
+     "kind": "action",
      "text": "Keep sweeping with Gengar"
     }
    ],
@@ -15063,10 +14976,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Crit KO'd Volcarona",
+      "label": "No crit, Volcarona is fine",
+      "nodeId": "n26_mmg4opab_ok"
+     },
+     {
+      "label": "A crit KO'd Volcarona",
       "nodeId": "n26_mmprt80z"
      }
     ]
@@ -15541,10 +15458,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Crit KO'd Volcarona",
+      "label": "No crit, Volcarona is fine",
+      "nodeId": "n26_mmg5g12r_ok"
+     },
+     {
+      "label": "A crit KO'd Volcarona",
       "nodeId": "n26_mmprp9yn"
      }
     ]
@@ -15941,10 +15862,6 @@
     {
      "kind": "action",
      "text": "Gengar +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again"
     },
     {
      "kind": "action",
@@ -16608,10 +16525,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Crit KO'd Volcarona",
+      "label": "No crit, Volcarona is fine",
+      "nodeId": "n26_mmg3q06s_ok"
+     },
+     {
+      "label": "A crit KO'd Volcarona",
       "nodeId": "n26_mmprqp6r"
      }
     ]
@@ -16910,10 +16831,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Crit KO'd Volcarona",
+      "label": "No crit, Volcarona is fine",
+      "nodeId": "n26_mmprrbdl_ok"
+     },
+     {
+      "label": "A crit KO'd Volcarona",
       "nodeId": "n26_mmprrms1"
      }
     ]
@@ -16983,10 +16908,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Crit KO'd Volcarona",
+      "label": "No crit, Volcarona is fine",
+      "nodeId": "n26_mmg41j3e_ok"
+     },
+     {
+      "label": "A crit KO'd Volcarona",
       "nodeId": "n26_mmprmwio"
      }
     ]
@@ -17345,10 +17274,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Crit KO'd Volcarona",
+      "label": "No crit, Volcarona is fine",
+      "nodeId": "n26_mmg4hc2e_ok"
+     },
+     {
+      "label": "A crit KO'd Volcarona",
       "nodeId": "n26_mmprqeq4"
      }
     ]
@@ -17442,6 +17375,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -17599,6 +17536,10 @@
     },
     {
      "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
+    },
+    {
+     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -17696,6 +17637,96 @@
     {
      "kind": "action",
      "text": "Keep sweeping with Poliwrath"
+    }
+   ],
+   "branch": null
+  },
+  "n24_95_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Gengar"
+    }
+   ],
+   "branch": null
+  },
+  "n23_mmykv7qw_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
+    }
+   ],
+   "branch": null
+  },
+  "n23_mmf08dmi_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
+    }
+   ],
+   "branch": null
+  },
+  "n23_mmf1aqfr_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Gengar"
+    }
+   ],
+   "branch": null
+  },
+  "n26_mmg4opab_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
+    }
+   ],
+   "branch": null
+  },
+  "n26_mmg5g12r_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
+    }
+   ],
+   "branch": null
+  },
+  "n26_mmg3q06s_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
+    }
+   ],
+   "branch": null
+  },
+  "n26_mmprrbdl_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
+    }
+   ],
+   "branch": null
+  },
+  "n26_mmg41j3e_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
+    }
+   ],
+   "branch": null
+  },
+  "n26_mmg4hc2e_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
     }
    ],
    "branch": null

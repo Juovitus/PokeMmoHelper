@@ -2266,6 +2266,10 @@
     },
     {
      "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
+    },
+    {
+     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -2288,6 +2292,10 @@
     {
      "kind": "action",
      "text": "Gengar +2 Sp.Atk"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "setup",
@@ -3420,6 +3428,10 @@
     },
     {
      "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
+    },
+    {
+     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -3450,6 +3462,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -3868,10 +3884,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Crit KO'd Volcarona",
+      "label": "No crit, Volcarona is fine",
+      "nodeId": "n2_mlkuwqib_ok"
+     },
+     {
+      "label": "A crit KO'd Volcarona",
       "nodeId": "n2_mo9ou5pf"
      }
     ]
@@ -3881,11 +3901,7 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -4058,11 +4074,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -4112,11 +4124,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -4463,11 +4471,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -4514,11 +4518,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -5175,11 +5175,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -5282,7 +5278,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -5922,10 +5918,6 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -6275,10 +6267,6 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -6308,7 +6296,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -6797,11 +6785,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -6834,11 +6818,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -6975,11 +6955,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -7013,11 +6989,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then use X Accuracy (+Accuracy)"
+     "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -7608,10 +7580,6 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -7641,7 +7609,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -7734,10 +7702,6 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -7760,10 +7724,6 @@
     {
      "kind": "action",
      "text": "Gengar +4 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again"
     },
     {
      "kind": "action",
@@ -7825,7 +7785,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore again"
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -11927,10 +11887,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Crit KO'd me, couldn't set Stealth Rock",
+      "label": "Stealth Rock was set",
+      "nodeId": "n4_mluyxrjq_ok"
+     },
+     {
+      "label": "A crit KO'd Chansey before Stealth Rock",
       "nodeId": "n4_mlvygbbx"
      }
     ]
@@ -14725,10 +14689,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Fainted",
+      "label": "Gengar didn't faint",
+      "nodeId": "n5_mn32rq0p_ok"
+     },
+     {
+      "label": "Gengar fainted",
       "nodeId": "n5_mn32s0jl"
      }
     ]
@@ -15220,10 +15188,14 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "What happened?",
     "options": [
      {
-      "label": "Fainted",
+      "label": "Gengar didn't faint",
+      "nodeId": "n5_mn32sfim_ok"
+     },
+     {
+      "label": "Gengar fainted",
       "nodeId": "n5_mn32st9t"
      }
     ]
@@ -15276,6 +15248,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -15600,6 +15576,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -16079,6 +16059,10 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -17052,6 +17036,42 @@
      }
     ]
    }
+  },
+  "n2_mlkuwqib_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
+    }
+   ],
+   "branch": null
+  },
+  "n4_mluyxrjq_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Poliwrath"
+    }
+   ],
+   "branch": null
+  },
+  "n5_mn32rq0p_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Gengar"
+    }
+   ],
+   "branch": null
+  },
+  "n5_mn32sfim_ok": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Gengar"
+    }
+   ],
+   "branch": null
   }
  }
 }
