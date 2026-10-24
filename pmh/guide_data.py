@@ -217,7 +217,8 @@ def tidy_steps(steps):
     return out
 
 
-SHADOW_RE = re.compile(r"\b(?:All|Whole|Click) Shadow\b", re.I)
+SHADOW_RE = re.compile(r"\bKeep using Shadow Ball\b|\bShadow Ball the rest\b|"
+                       r"\b(?:All|Whole|Click) Shadow\b", re.I)
 SWITCH_RE = re.compile(
     r"(switch to|teleport to|send in|sacrifice|double switch|encore sacrifice|let it switch)",
     re.I)

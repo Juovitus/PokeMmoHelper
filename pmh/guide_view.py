@@ -124,15 +124,33 @@ class GuideView:
             pic = tk.Label(strip, bg=BG)
             pic.pack(side="left")
             self.picture(pic, kind, name, 3 if kind == "pokemon" else 1)
-        label = tk.Label(row, text=text, bg=BG, fg=fg, font=font,
-                         justify="left", anchor="w")
-        label.pack(side="left", fill="x", expand=not warn)
         offset = 34 * len(marks)
-        if warn:
+        # a short warning sits after the text; a long one gets its own
+        # wrapped line under it
+        inline = warn and len(warn) <= 22
+        column = row
+        if warn and not inline:
+            column = tk.Frame(row, bg=BG)
+            column.pack(side="left", fill="x", expand=True)
+        label = tk.Label(column, text=text, bg=BG, fg=fg, font=font,
+                         justify="left", anchor="w")
+        if column is row:
+            label.pack(side="left", fill="x", expand=not inline)
+        else:
+            label.pack(fill="x")
+        if inline:
             tk.Label(row, text=f"⚠ {warn}", bg=BG, fg=RED,
                      font=("Segoe UI", 8, "bold")).pack(
                 side="left", padx=(6, 0))
             offset += 130
+        elif warn:
+            below = tk.Label(column, text=f"⚠ {warn}", bg=BG, fg=RED,
+                             font=("Segoe UI", 8, "bold"), justify="left",
+                             anchor="w")
+            below.pack(fill="x")
+            self.app.wrap_labels.append(below)
+            self.app.wrap_off[below] = offset
+            below.config(wraplength=max(60, self.app.current_wrap() - offset))
         self.app.wrap_labels.append(label)
         self.app.wrap_off[label] = offset
         label.config(wraplength=max(60, self.app.current_wrap() - offset))
@@ -327,9 +345,11 @@ class GuideView:
 
     def render_champions(self, data):
         if data.get("warning"):
-            # the Exp. Amplifier reminder goes first, in red
+            # the translation-errors notice and the Exp. Amplifier reminder
+            # go first, in red
             lines = [l for l in data["warning"].splitlines() if l.strip()]
-            urgent = [l for l in lines if re.search(r"Exp\.? Amplifier", l)]
+            urgent = [l for l in lines
+                      if re.search(r"Exp\.? Amplifier|translation errors", l)]
             rest = [l for l in lines if l not in urgent]
             for text, color in (("\n".join(urgent), RED),
                                 ("\n".join(rest), AMBER)):

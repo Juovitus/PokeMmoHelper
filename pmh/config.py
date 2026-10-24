@@ -21,7 +21,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 GITHUB_REPO = "Juovitus/PokeMmoHelper"
-VERSION = "v47.8"
+VERSION = "v47.19"
 
 # Keep data files next to the .exe when packaged, or next to the script.
 if getattr(sys, "frozen", False):
@@ -80,7 +80,7 @@ BAR = "#2b2d38"
 FG = "#e6e6e6"
 ACCENT = "#7aa2f7"
 SWITCH = "#4fd6e0"
-SHADOW = "#c58bf0"   # "All Shadow Ball": Gengar's whole plan
+SHADOW = "#c58bf0"   # "Keep using Shadow Ball": Gengar's whole plan
 BUTTON_BORDER = "#5a6270"   # outline around buttons so they stand out
 RED = "#ff4d4d"
 AMBER = "#e0af68"

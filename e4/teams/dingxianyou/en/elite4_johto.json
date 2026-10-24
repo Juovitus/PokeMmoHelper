@@ -869,11 +869,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -894,15 +894,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -941,15 +937,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -1327,15 +1319,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -1355,10 +1343,6 @@
   "n22_mlmkgfnx": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 3, 8"
     },
@@ -1369,7 +1353,7 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb + Stealth Rock set",
@@ -1410,7 +1394,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -1723,7 +1707,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -1877,11 +1861,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -1903,15 +1887,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 5, 8"
-    },
-    {
-     "kind": "note",
-     "text": "Check who moves first"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check who moves first",
     "options": [
      {
       "label": "Gengar Encored first",
@@ -1936,15 +1916,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -2012,15 +1988,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -2124,15 +2096,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -2173,7 +2141,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -2314,15 +2282,11 @@
     {
      "kind": "action",
      "text": "Chansey uses Stealth Rock"
-    },
-    {
-     "kind": "note",
-     "text": "Check the damage dealt"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the damage dealt",
     "options": [
      {
       "label": "50% (use Full Restore (full HP + cures status) first if the crit does 75%)",
@@ -2408,17 +2372,13 @@
   "n22_m81wljm1": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's move"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 4"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Empoleon uses Surf",
@@ -2880,7 +2840,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -3231,17 +3191,13 @@
   "n22_mm59a2fl": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 4, 7"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Flame Orb",
@@ -3405,15 +3361,11 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -3460,15 +3412,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 3, 8"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's item"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -3797,7 +3745,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": {
@@ -3942,7 +3890,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -4068,15 +4016,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 3"
-    },
-    {
-     "kind": "note",
-     "text": "Check whether Vine Whip hit"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check whether Vine Whip hit",
     "options": [
      {
       "label": "Hit",
@@ -4388,17 +4332,13 @@
   "n23_mmfvp3na": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's move"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 4, 7, 8"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Crobat uses Super Fang",
@@ -4468,7 +4408,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -4596,15 +4536,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 3"
-    },
-    {
-     "kind": "note",
-     "text": "Check whether Vine Whip hit"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check whether Vine Whip hit",
     "options": [
      {
       "label": "Hit",
@@ -4870,15 +4806,11 @@
     {
      "kind": "action",
      "text": "Slowbro uses Yawn"
-    },
-    {
-     "kind": "note",
-     "text": "Check whether Vine Whip hit"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check whether Vine Whip hit",
     "options": [
      {
       "label": "Hit",
@@ -4954,15 +4886,10 @@
    "branch": null
   },
   "n23_mmfv2rzu": {
-   "steps": [
-    {
-     "kind": "action",
-     "text": "Check the opponent's move"
-    }
-   ],
+   "steps": [],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Tentacruel uses Scald",
@@ -5042,15 +4969,11 @@
     {
      "kind": "action",
      "text": "Chansey uses Teleport"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's move"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Crobat uses Cross Poison",
@@ -5136,15 +5059,11 @@
     {
      "kind": "action",
      "text": "Slowbro uses Yawn"
-    },
-    {
-     "kind": "note",
-     "text": "Check whether Vine Whip hit Slowbro"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check whether Vine Whip hit Slowbro",
     "options": [
      {
       "label": "Hit",
@@ -5185,7 +5104,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -5320,15 +5239,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -5472,7 +5387,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -5561,15 +5476,11 @@
     {
      "kind": "action",
      "text": "Slowbro uses Yawn"
-    },
-    {
-     "kind": "note",
-     "text": "Check whether Vine Whip hit Slowpoke"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check whether Vine Whip hit Slowpoke",
     "options": [
      {
       "label": "Hit",
@@ -5615,7 +5526,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -5662,7 +5573,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -5818,15 +5729,11 @@
     {
      "kind": "action",
      "text": "Slowbro uses Yawn"
-    },
-    {
-     "kind": "note",
-     "text": "Check whether Vine Whip hit"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check whether Vine Whip hit",
     "options": [
      {
       "label": "Hit",
@@ -5843,7 +5750,7 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Use Stealth Rock, taking Megahorn"
+     "text": "Chansey uses Stealth Rock, taking Megahorn"
     },
     {
      "kind": "action",
@@ -6252,7 +6159,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -6282,7 +6189,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": {
@@ -6417,7 +6324,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -6764,7 +6671,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -6794,7 +6701,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": {
@@ -7071,15 +6978,11 @@
     {
      "kind": "action",
      "text": "Switch to Slowbro"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's item"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -7137,7 +7040,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -7167,7 +7070,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": {
@@ -7356,7 +7259,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -8061,7 +7964,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -8233,7 +8136,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": {
@@ -8495,15 +8398,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 1, 3, 6"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's move"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Machamp uses Dynamic Punch",
@@ -8612,7 +8511,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -8642,7 +8541,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": {
@@ -8923,7 +8822,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -9278,7 +9177,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -9308,7 +9207,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": {
@@ -9487,15 +9386,10 @@
    }
   },
   "n24_39": {
-   "steps": [
-    {
-     "kind": "action",
-     "text": "Check the opponent's ability"
-    }
-   ],
+   "steps": [],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's ability",
     "options": [
      {
       "label": "Intimidate",
@@ -9620,7 +9514,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -9851,7 +9745,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -10295,10 +10189,6 @@
     {
      "kind": "action",
      "text": "Gengar +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
     }
    ],
    "branch": {
@@ -10466,15 +10356,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -10778,17 +10664,13 @@
   "n25_mmg0j7hn": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 6, 7"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Air Balloon",
@@ -11939,11 +11821,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -12462,10 +12344,6 @@
   "n25_mlkyfin4": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 1, 2, 4, 5, 7, 8"
     },
@@ -12476,7 +12354,7 @@
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -12909,17 +12787,13 @@
   "n25_mlkyfj61": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 6, 7"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Air Balloon",
@@ -13379,15 +13253,10 @@
    "branch": null
   },
   "n25_mnrg3q9b": {
-   "steps": [
-    {
-     "kind": "action",
-     "text": "Check whether Leaf Blade trapped it"
-    }
-   ],
+   "steps": [],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check whether Leaf Blade trapped it",
     "options": [
      {
       "label": "No",
@@ -14064,7 +13933,7 @@
     },
     {
      "kind": "action",
-     "text": "Use Stealth Rock (Chansey uses Soft-Boiled if it didn't switch)"
+     "text": "Chansey uses Stealth Rock (Chansey uses Soft-Boiled if it didn't switch)"
     },
     {
      "kind": "action",
@@ -14135,7 +14004,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball. Cheaper option: Volcarona +2"
+     "text": "Keep using Shadow Ball. Cheaper option: Volcarona +2"
     }
    ],
    "branch": {
@@ -14180,15 +14049,10 @@
    }
   },
   "n25_102": {
-   "steps": [
-    {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    }
-   ],
+   "steps": [],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Air Balloon",
@@ -14480,15 +14344,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -14998,15 +14858,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 5, 6"
-    },
-    {
-     "kind": "note",
-     "text": "Check the damage dealt"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the damage dealt",
     "options": [
      {
       "label": "60%",
@@ -15529,15 +15385,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 5, 6"
-    },
-    {
-     "kind": "note",
-     "text": "Check the damage dealt"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the damage dealt",
     "options": [
      {
       "label": "60%",
@@ -15562,11 +15414,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -15678,7 +15530,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -15873,7 +15725,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -16403,15 +16255,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 1"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's move"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Feraligatr uses Superpower",
@@ -16427,17 +16275,13 @@
   "n26_mmg3mqdx": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's move"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 1, 5, 7"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Feraligatr uses Waterfall",
@@ -16547,15 +16391,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 2, 5, 6"
-    },
-    {
-     "kind": "note",
-     "text": "Check the damage dealt"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the damage dealt",
     "options": [
      {
       "label": "60%",
@@ -16693,11 +16533,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -16988,15 +16828,11 @@
     {
      "kind": "action",
      "text": "Chansey uses Stealth Rock"
-    },
-    {
-     "kind": "note",
-     "text": "Check the damage dealt"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the damage dealt",
     "options": [
      {
       "label": "90%",
@@ -17370,15 +17206,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -17528,15 +17360,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",

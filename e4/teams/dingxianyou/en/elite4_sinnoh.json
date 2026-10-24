@@ -641,7 +641,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -700,7 +700,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -888,17 +888,13 @@
   "n16_mmhhnqtx": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the damage dealt"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 5, 7"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the damage dealt",
     "options": [
      {
       "label": "15 - 18% (crit 33 - 40%)",
@@ -976,17 +972,13 @@
   "n16_mmhhn496": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's move"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 5, 7, 8"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Drapion uses Crunch",
@@ -1056,7 +1048,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -1194,15 +1186,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 6, 8"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's move"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Superpower",
@@ -1286,15 +1274,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 7, 8"
-    },
-    {
-     "kind": "note",
-     "text": "Check the damage dealt"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the damage dealt",
     "options": [
      {
       "label": "29.4 - 34.5% (crit 43.7 - 51.7%)",
@@ -1848,7 +1832,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -2010,15 +1994,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 7, 8, 3"
-    },
-    {
-     "kind": "note",
-     "text": "Check the damage dealt"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the damage dealt",
     "options": [
      {
       "label": "Below 35.6% (crit 53.4%)",
@@ -2392,7 +2372,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": {
@@ -2599,15 +2579,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 7, 8"
-    },
-    {
-     "kind": "note",
-     "text": "Check Earthquake's damage"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check Earthquake's damage",
     "options": [
      {
       "label": "29.4 - 34.5% (crit 43.7 - 51.7%)",
@@ -2640,7 +2616,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -3100,17 +3076,13 @@
   "n16_mmiq69e6": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check Chansey's status"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 7"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check Chansey's status",
     "options": [
      {
       "label": "Nothing unusual",
@@ -3665,17 +3637,13 @@
   "n16_mmitn7sr": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's move"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 5, 7"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Wring Out / Gyro Ball",
@@ -4211,15 +4179,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 1, 5"
-    },
-    {
-     "kind": "note",
-     "text": "Check the Life Orb"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the Life Orb",
     "options": [
      {
       "label": "Life Orb",
@@ -4371,7 +4335,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball. If Shadow Ball is locked, click to see"
+     "text": "Keep using Shadow Ball. If Shadow Ball is locked, click to see"
     }
    ],
    "branch": {
@@ -4507,7 +4471,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -4696,17 +4660,13 @@
   "n17_mmlqrzkx": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check whether it hit"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 5"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check whether it hit",
     "options": [
      {
       "label": "Hit",
@@ -4895,7 +4855,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -5114,15 +5074,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 1, 4"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's move"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Rhyperior uses Earthquake",
@@ -5380,17 +5336,13 @@
   "n17_mmlsazb8": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 1, 3, 4, 5, 7, 8"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -5448,7 +5400,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -5592,7 +5544,7 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Keep using Yawn until the back row comes out"
+     "text": "Keep using Yawn until the opponent switches"
     },
     {
      "kind": "action",
@@ -5776,17 +5728,13 @@
   "n17_mnu6ueb4": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 2, 6"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Leftovers",
@@ -6036,15 +5984,11 @@
     {
      "kind": "action",
      "text": "Slowbro uses Yawn"
-    },
-    {
-     "kind": "note",
-     "text": "Check whether Megahorn hit"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check whether Megahorn hit",
     "options": [
      {
       "label": "Hit",
@@ -6229,15 +6173,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 4, 8"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's item"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -6352,7 +6292,7 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Use Stealth Rock (or Chansey uses Soft-Boiled if it didn't switch)"
+     "text": "Chansey uses Stealth Rock (or Chansey uses Soft-Boiled if it didn't switch)"
     },
     {
      "kind": "action",
@@ -7020,15 +6960,11 @@
     {
      "kind": "action",
      "text": "Slowbro uses Yawn"
-    },
-    {
-     "kind": "note",
-     "text": "Check Megahorn"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check Megahorn",
     "options": [
      {
       "label": "Hit",
@@ -7151,7 +7087,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -7525,7 +7461,7 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Keep using Yawn until the back row comes out"
+     "text": "Keep using Yawn until the opponent switches"
     },
     {
      "kind": "action",
@@ -7588,7 +7524,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -7755,17 +7691,13 @@
   "n17_mnu5oydb": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 2, 6"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Leftovers",
@@ -8261,7 +8193,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -8325,10 +8257,6 @@
     {
      "kind": "action",
      "text": "Gengar +2 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
     }
    ],
    "branch": {
@@ -8490,15 +8418,11 @@
     {
      "kind": "action",
      "text": "Slowbro uses Yawn"
-    },
-    {
-     "kind": "note",
-     "text": "Check Megahorn"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check Megahorn",
     "options": [
      {
       "label": "Hit",
@@ -8719,7 +8643,7 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Use Charm until Durant comes out"
+     "text": "Chansey uses Charm until Durant comes out"
     },
     {
      "kind": "action",
@@ -9064,15 +8988,11 @@
     {
      "kind": "action",
      "text": "Slowbro uses Yawn"
-    },
-    {
-     "kind": "note",
-     "text": "Check Megahorn"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check Megahorn",
     "options": [
      {
       "label": "Hit",
@@ -9161,7 +9081,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -9186,7 +9106,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -9287,7 +9207,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -9574,7 +9494,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -9770,7 +9690,7 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Use Stealth Rock again, taking Outrage"
+     "text": "Chansey uses Stealth Rock again, taking Outrage"
     },
     {
      "kind": "action",
@@ -10155,7 +10075,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -10210,7 +10130,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -10243,7 +10163,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball. Switched to Bronzong: sacrifice Politoed, Poliwrath Belly Drum (+6 Atk)"
+     "text": "Keep using Shadow Ball. Switched to Bronzong: sacrifice Politoed, Poliwrath Belly Drum (+6 Atk)"
     }
    ],
    "branch": null
@@ -10439,7 +10359,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": {
@@ -10469,7 +10389,7 @@
     },
     {
      "kind": "action",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     },
     {
      "kind": "note",
@@ -10523,7 +10443,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball 【don't click the wrong Cacturne~】"
+     "text": "Keep using Shadow Ball 【don't click the wrong Cacturne~】"
     }
    ],
    "branch": null
@@ -10963,15 +10883,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 2"
-    },
-    {
-     "kind": "note",
-     "text": "Check Medicham's HP"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check Medicham's HP",
     "options": [
      {
       "label": "Full HP",
@@ -11268,17 +11184,13 @@
   "n18_mmlwsxvk": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's move"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 5"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Magmortar uses Cross Chop",
@@ -11657,7 +11569,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -11686,7 +11598,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -12411,17 +12323,13 @@
   "n18_mm1ov9l9": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's move"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 4, 5, 8"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Maractus uses Drain Punch",
@@ -12826,7 +12734,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -12843,7 +12751,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -12886,7 +12794,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -13120,11 +13028,11 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -13169,7 +13077,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -13194,7 +13102,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball. Switch to Gengar vs Gallade and keep boosting"
+     "text": "Keep using Shadow Ball. Switch to Gengar vs Gallade and keep boosting"
     }
    ],
    "branch": null
@@ -13215,7 +13123,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -13292,11 +13200,11 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -13392,7 +13300,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -13629,7 +13537,7 @@
     },
     {
      "kind": "note",
-     "text": "Focus Blast Girafarig, All Shadow Ball the rest 【5% chance of a random roll taking Absol】"
+     "text": "Focus Blast Girafarig, Shadow Ball the rest 【5% chance of a random roll taking Absol】"
     }
    ],
    "branch": {
@@ -13834,15 +13742,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -13926,15 +13830,11 @@
     {
      "kind": "action",
      "text": "Chansey uses Soft-Boiled"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's item"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -14094,7 +13994,7 @@
     },
     {
      "kind": "note",
-     "text": "Focus Blast Girafarig, All Shadow Ball the rest 【5% chance of a random roll taking Absol】"
+     "text": "Focus Blast Girafarig, Shadow Ball the rest 【5% chance of a random roll taking Absol】"
     }
    ],
    "branch": {
@@ -14417,7 +14317,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -14465,15 +14365,11 @@
     {
      "kind": "action",
      "text": "Switch to Slowbro"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's item"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -14561,10 +14457,6 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Speed (+2 Speed)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -14683,15 +14575,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 1, 5"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's move"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Dragon Pulse",
@@ -15011,10 +14899,6 @@
     },
     {
      "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -15127,7 +15011,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -15207,7 +15091,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -15323,7 +15207,7 @@
     },
     {
      "kind": "note",
-     "text": "Focus Blast Girafarig, All Shadow Ball the rest 【5% chance of a random roll taking Absol】"
+     "text": "Focus Blast Girafarig, Shadow Ball the rest 【5% chance of a random roll taking Absol】"
     }
    ],
    "branch": {
@@ -15485,15 +15369,11 @@
     },
     {
      "kind": "action",
-     "text": "Encore, then +2 Sp.Atk"
+     "text": "Encore, then +2 Sp.Atk, then use X Speed (+2 Speed)"
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
+     "text": "Encore again, then use X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -15605,7 +15485,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -15613,17 +15493,13 @@
   "n20_mmm3df1a": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 5, 6"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -15889,15 +15765,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 4, 8"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's item"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -16055,7 +15927,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -16063,17 +15935,13 @@
   "n20_mmm4r542": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the opponent's item"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 5, 6"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -16110,7 +15978,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -16378,15 +16246,11 @@
     {
      "kind": "action",
      "text": "Chansey uses Teleport, switch to Gengar"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's item"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Has Life Orb",
@@ -16461,10 +16325,6 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -16614,10 +16474,6 @@
     },
     {
      "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -16653,7 +16509,7 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Use Charm until Garchomp comes out"
+     "text": "Chansey uses Charm until Garchomp comes out"
     },
     {
      "kind": "action",
@@ -16923,17 +16779,13 @@
   "n20_m836xmnf": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Check the damage dealt"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 1, 4, 5, 8"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the damage dealt",
     "options": [
      {
       "label": "32 - 39% (crit 49 - 59%)",
@@ -17156,15 +17008,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 4, 8"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's item"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -17222,10 +17070,6 @@
     },
     {
      "kind": "action",
-     "text": "Encore again (Possible Focus Sash)"
-    },
-    {
-     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -17244,15 +17088,11 @@
     {
      "kind": "setup",
      "text": "Opponent is using team 5, 6"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's item"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's item",
     "options": [
      {
       "label": "Life Orb",
@@ -17445,15 +17285,11 @@
     {
      "kind": "action",
      "text": "Wait to be KO'd"
-    },
-    {
-     "kind": "note",
-     "text": "Check Close Combat"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check Close Combat",
     "options": [
      {
       "label": "Has Close Combat",
@@ -17839,7 +17675,7 @@
    "steps": [
     {
      "kind": "action",
-     "text": "Use Charm until Garchomp / Aerodactyl comes out"
+     "text": "Chansey uses Charm until Garchomp / Aerodactyl comes out"
     },
     {
      "kind": "action",
@@ -18528,15 +18364,11 @@
     {
      "kind": "action",
      "text": "Send in Politoed and let it die"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's move"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Enemy Rayquaza uses Extreme Speed",
@@ -18565,7 +18397,7 @@
     },
     {
      "kind": "note",
-     "text": "All Shadow Ball"
+     "text": "Keep using Shadow Ball"
     }
    ],
    "branch": null
@@ -18579,15 +18411,11 @@
     {
      "kind": "action",
      "text": "Chansey uses Teleport"
-    },
-    {
-     "kind": "note",
-     "text": "Check the opponent's move"
     }
    ],
    "branch": {
     "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
+    "prompt": "Check the opponent's move",
     "options": [
      {
       "label": "Not Extreme Speed",
