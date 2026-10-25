@@ -11248,8 +11248,12 @@
      "text": "Keep yawning until Serperior comes out"
     },
     {
+     "kind": "note",
+     "text": "If Eelektross comes out instead: Slowbro uses Protect, then Yawn"
+    },
+    {
      "kind": "action",
-     "text": "Slowbro uses Teleport, switch to Volcarona"
+     "text": "When Serperior comes out, Slowbro uses Teleport, switch to Volcarona"
     },
     {
      "kind": "action",
@@ -11258,10 +11262,6 @@
     {
      "kind": "action",
      "text": "Keep sweeping with Volcarona"
-    },
-    {
-     "kind": "note",
-     "text": "Yawn until Eelektross comes out, then Protect and Yawn"
     }
    ],
    "branch": null

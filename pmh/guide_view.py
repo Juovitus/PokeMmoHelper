@@ -500,9 +500,14 @@ class GuideView:
                       ("Segoe UI", 9, "bold"), pady=(4, 0))
             tidy = list(tidy_steps(steps))
             shown = []
+            no_encore = False
             for pos, (kind, raw) in enumerate(tidy):
                 nxt = tidy[pos + 1][1] if pos + 1 < len(tidy) else ""
-                shown.append((kind, clean_step(raw, prev, nxt=nxt)))
+                # a "Cheaper option" after a No Encore plan skips it too
+                encore = not (no_encore and "Cheaper option" in raw)
+                shown.append((kind, clean_step(raw, prev, auto_encore=encore,
+                                               nxt=nxt)))
+                no_encore = no_encore or "no encore" in raw.lower()
                 prev = raw
             lines = team_lines_first(shown)
             # the guide ends here (no more choices): the Shadow Ball plan

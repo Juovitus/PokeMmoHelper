@@ -21,7 +21,18 @@ if exist tests\ (
     exit /b 1
   )
 )
-REM The running exe locks the file, so close it before building.
+REM The running exe locks the file, so close it before building. Ask it to
+REM quit first (port 47653): killing it outright leaves its temp folder
+REM behind with a "Failed to remove temporary directory" warning.
+python -c "import socket; socket.create_connection(('127.0.0.1', 47653), 1).sendall(b'quit')" >nul 2>&1
+set WAIT=0
+:waitclose
+tasklist /fi "imagename eq PokeMmoHelper.exe" 2>nul | find /i "PokeMmoHelper.exe" >nul || goto closed
+set /a WAIT+=1
+if %WAIT% geq 10 goto closed
+ping -n 2 127.0.0.1 >nul
+goto waitclose
+:closed
 taskkill /im PokeMmoHelper.exe /f >nul 2>&1
 python -m PyInstaller --version >nul 2>&1 || python -m pip install pyinstaller
 set SPR=

@@ -14990,31 +14990,6 @@
     ]
    }
   },
-  "n14_mmrlzcww": {
-   "steps": [
-    {
-     "kind": "action",
-     "text": "Switch to Slowbro"
-    },
-    {
-     "kind": "action",
-     "text": "Slowbro uses Yawn"
-    },
-    {
-     "kind": "action",
-     "text": "Sacrifice Politoed"
-    },
-    {
-     "kind": "action",
-     "text": "Poliwrath Belly Drum (+6 Atk)"
-    },
-    {
-     "kind": "action",
-     "text": "Keep sweeping with Poliwrath"
-    }
-   ],
-   "branch": null
-  },
   "n14_mmnntlfh": {
    "steps": [
     {
@@ -15036,18 +15011,13 @@
     {
      "kind": "action",
      "text": "Encore again, then use X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Gengar"
     }
    ],
-   "branch": {
-    "kind": "choice",
-    "prompt": "What did the opponent do / send out?",
-    "options": [
-     {
-      "label": "Switched to Conkeldurr",
-      "nodeId": "n14_mmrlzcww"
-     }
-    ]
-   }
+   "branch": null
   },
   "n14_mmnntljb": {
    "steps": [
