@@ -21,7 +21,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 GITHUB_REPO = "Juovitus/PokeMmoHelper"
-VERSION = "v48"
+VERSION = "v49"
+# Feedback goes to a Google Form: (form id, comment field, details field)
+FEEDBACK_FORM = ("1FAIpQLSfuNbBTSpB4ToaUBLKIF3O1ZLCFHmxzN80iLaC4iyBlBWjyPg",
+                 "entry.569389409", "entry.45960554")
 
 # Keep data files next to the .exe when packaged, or next to the script.
 if getattr(sys, "frozen", False):

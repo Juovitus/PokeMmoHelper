@@ -4712,7 +4712,7 @@
     "prompt": "What did the opponent do / send out?",
     "options": [
      {
-      "label": "Lucario 71 (if you click the wrong move midway, remember to Encore again)",
+      "label": "Lucario has a Focus Sash (if you click the wrong move midway, remember to Encore again)",
       "nodeId": "n7_mqi5agka"
      }
     ]

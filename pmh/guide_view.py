@@ -1,6 +1,28 @@
 """The Elite Four guide view."""
 from .berry_view import *  # noqa: F401,F403
 
+
+def send_feedback(comment, details):
+    """Post a comment and the guide details to the feedback Google Form.
+    Returns None when it went through, else a short error message."""
+    import urllib.parse
+    form, comment_field, details_field = FEEDBACK_FORM
+    body = urllib.parse.urlencode({comment_field: comment[:4000],
+                                   details_field: details[:20000]}).encode()
+    req = urllib.request.Request(
+        f"https://docs.google.com/forms/d/e/{form}/formResponse", data=body,
+        headers={"User-Agent": "PokeMmoHelper",
+                 "Content-Type": "application/x-www-form-urlencoded"})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return None if resp.status == 200 else f"HTTP {resp.status}"
+    except urllib.error.HTTPError as e:
+        return f"HTTP {e.code}"
+    except Exception as e:
+        return "no connection" if isinstance(e, urllib.error.URLError) \
+            else type(e).__name__
+
+
 class GuideView:
     """One region's Elite Four guide: champion -> opponent's lead -> steps,
     choosing an option wherever the guide branches."""
@@ -264,6 +286,7 @@ class GuideView:
             return
         team_id = self.app.e4_team(teams, default)
         team = next(t for t in teams if t["id"] == team_id)
+        self.team = team
         self.has_gengar = "Gengar" in team.get("pokemon", [])
         self.team_header(teams, team)
         data = load_e4_guide(root, team_id, self.guide_id)
@@ -379,6 +402,10 @@ class GuideView:
         self.button(back, "‹ Back", self.back).pack(padx=1, pady=1)
         back.pack(side="left")
         self.restart_button(bar, "↺ Restart").pack(side="left", padx=4)
+        feedback = tk.Frame(bar, bg=BUTTON_BORDER)
+        self.button(feedback, "✎ Feedback", self.open_feedback,
+                    fg=DIM).pack(padx=1, pady=1)
+        feedback.pack(side="right")
         crumbs = [self.group["name"]] + [label for label, _ in self.trail]
         row = tk.Frame(self.frame, bg=BG)
         row.pack(fill="x")
@@ -395,6 +422,95 @@ class GuideView:
         # a clear line between the trainer's info and the guide steps
         tk.Frame(self.frame, height=2, bg=BUTTON_BORDER).pack(
             fill="x", pady=(8, 4))
+
+    def feedback_details(self):
+        """Where the user is in the guide, sent along with their comment."""
+        crumbs = [self.group["name"]] + [f"{label} [{node_id}]"
+                                         for label, node_id in self.trail]
+        lines = [f"Version: {VERSION}",
+                 f"Team: {self.team['name']} ({self.team['id']})",
+                 f"Region: {self.guide_id}",
+                 "Path: " + "  ›  ".join(crumbs),
+                 "On screen:"]
+        return "\n".join(lines + getattr(self, "on_screen", []))
+
+    def open_feedback(self):
+        old = getattr(self.app, "feedback_win", None)
+        if old is not None and old.winfo_exists():
+            old.lift()                  # only one at a time
+            old.focus_force()
+            return
+        details = self.feedback_details()
+        win = self.app.feedback_win = tk.Toplevel(self.app.root, bg=BG)
+        win.title("Send feedback")
+        win.transient(self.app.root)   # stays above the overlay
+        win.attributes("-topmost", True)
+        win.resizable(False, False)
+        tk.Label(win, text="What's wrong, or what could be better?", bg=BG,
+                 fg=FG, font=("Segoe UI", 9, "bold")).pack(
+            anchor="w", padx=10, pady=(10, 2))
+        comment = tk.Text(win, width=48, height=6, bg=BAR, fg=FG, bd=0,
+                          insertbackground=FG, wrap="word",
+                          font=("Segoe UI", 9), padx=6, pady=4)
+        comment.pack(padx=10, fill="x")
+        comment.focus_set()
+        tk.Label(win, text="Also sent (no personal info):", bg=BG, fg=DIM,
+                 font=("Segoe UI", 8)).pack(anchor="w", padx=10, pady=(8, 2))
+        preview = tk.Text(win, width=48, height=7, bg=BAR, fg=DIM, bd=0,
+                          wrap="word", font=("Segoe UI", 8), padx=6, pady=4)
+        preview.insert("1.0", details)
+        preview.config(state="disabled")
+        preview.pack(padx=10, fill="x")
+        row = tk.Frame(win, bg=BG)
+        row.pack(fill="x", padx=10, pady=10)
+        status = tk.Label(row, text="", bg=BG, fg=DIM, font=("Segoe UI", 8))
+        status.pack(side="left")
+
+        def done(error):
+            if error:
+                status.config(text=f"Couldn't send: {error}", fg=RED)
+                sending[0] = False
+            else:
+                status.config(text="Sent, thanks!", fg=CHECK_GREEN)
+                win.after(1500, win.destroy)
+
+        sending = [False]
+
+        def send():
+            text = comment.get("1.0", "end").strip()
+            if not text:
+                status.config(text="Type a comment first.", fg=AMBER)
+                return
+            if sending[0]:
+                return
+            sending[0] = True
+            status.config(text="Sending…", fg=DIM)
+            # the thread only fills the queue; Tk is touched from here
+            result = queue.Queue()
+            threading.Thread(
+                target=lambda: result.put(send_feedback(text, details)),
+                daemon=True).start()
+
+            def wait():
+                if not win.winfo_exists():
+                    return              # closed while sending
+                try:
+                    done(result.get_nowait())
+                except queue.Empty:
+                    win.after(200, wait)
+            win.after(200, wait)
+
+        for text, command, fg in (("Cancel", win.destroy, DIM),
+                                  ("Send", send, ACCENT)):
+            frame = tk.Frame(row, bg=BUTTON_BORDER)
+            flat_button(frame, text, command, BAR, fg, HOVER,
+                        font=("Segoe UI", 9, "bold"), padx=10,
+                        pady=2).pack(padx=1, pady=1)
+            frame.pack(side="right", padx=(6, 0))
+        win.update_idletasks()
+        x = self.app.root.winfo_rootx() + 20
+        y = self.app.root.winfo_rooty() + 60
+        win.geometry(f"+{x}+{y}")
 
     def toggle_teams(self):
         self.teams_open = not self.teams_open
@@ -487,6 +603,7 @@ class GuideView:
         first = last
         while first > 0 and self.only_option(self.trail[first - 1][1]):
             first -= 1
+        self.on_screen = []    # what the guide shows, for feedback reports
         for index, (label, node_id) in enumerate(self.trail):
             if index < first:
                 continue
@@ -496,6 +613,7 @@ class GuideView:
             head_color = ORANGE if index == 0 else ACCENT
             heading = (f"Enemy sends out {label}" if is_pokemon_label(label)
                        else label)
+            self.on_screen.append(f"▸ {heading} [{node_id}]")
             self.rich(f"▸ {heading}", head_color,
                       ("Segoe UI", 9, "bold"), pady=(4, 0))
             tidy = list(tidy_steps(steps))
@@ -510,6 +628,7 @@ class GuideView:
                 no_encore = no_encore or "no encore" in raw.lower()
                 prev = raw
             lines = team_lines_first(shown)
+            self.on_screen += [f"  ({kind}) {text}" for kind, text in lines]
             # the guide ends here (no more choices): the Shadow Ball plan
             # is the finish, so it gets the purple highlight
             ends = current and not (branch or {}).get("options")
@@ -543,6 +662,8 @@ class GuideView:
                               FG if current else DIM, ("Segoe UI", 9),
                               warn=warn)
         if branch:
+            self.on_screen.append("Options: " + " | ".join(
+                o["label"] for o in branch.get("options", [])))
             # an empty prompt means the buttons speak for themselves
             prompt = branch.get("prompt")
             if prompt != "":

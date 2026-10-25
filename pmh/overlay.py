@@ -1377,6 +1377,11 @@ class Overlay:
                 if self.root.state() != "normal":
                     self.root.deiconify()
                 self.root.attributes("-topmost", True)
+                # the feedback window stays above the overlay
+                win = getattr(self, "feedback_win", None)
+                if win is not None and win.winfo_exists():
+                    win.attributes("-topmost", True)
+                    win.lift()
             except Exception:
                 pass
 
