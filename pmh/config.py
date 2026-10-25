@@ -21,7 +21,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 GITHUB_REPO = "Juovitus/PokeMmoHelper"
-VERSION = "v49"
+VERSION = "v49.4"
 # Feedback goes to a Google Form: (form id, comment field, details field)
 FEEDBACK_FORM = ("1FAIpQLSfuNbBTSpB4ToaUBLKIF3O1ZLCFHmxzN80iLaC4iyBlBWjyPg",
                  "entry.569389409", "entry.45960554")

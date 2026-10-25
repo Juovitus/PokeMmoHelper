@@ -74,27 +74,151 @@ def canvas_size(canvas, default_w, default_h):
 
 
 def draw_bar(canvas, fraction, color, text="", default_w=100, default_h=12,
-             notches=()):
+             notches=(), upward=False):
     """Paint a progress bar: a filled rectangle, watering ticks along the top
     and bottom edges (white = needs water, dark = already watered) and
-    centred text with a dark outline so it stays readable on any colour."""
+    centred text with a dark outline so it stays readable on any colour.
+    `upward`: a standing bar that fills from the bottom (text turned on its
+    side, ticks along the left and right edges)."""
     width, height = canvas_size(canvas, default_w, default_h)
     canvas.delete("all")
     fraction = max(0.0, min(1.0, fraction))
+    length, thick = (height, width) if upward else (width, height)
     if fraction > 0:
-        canvas.create_rectangle(0, 0, max(1, round(width * fraction)),
-                                height, fill=color, width=0)
-    tick = max(3, height // 4)      # ticks stay clear of the text
+        filled = max(1, round(length * fraction))
+        canvas.create_rectangle(*((0, height - filled, width, height)
+                                  if upward else (0, 0, filled, height)),
+                                fill=color, width=0)
+    tick = max(3, thick // 4)       # ticks stay clear of the text
     for mark, watered in notches:
-        x = min(max(round(width * mark), 1), width - 1)
+        at = min(max(round(length * mark), 1), length - 1)
         line = BG if watered else "#ffffff"
-        canvas.create_line(x, 0, x, tick, width=2, fill=line)
-        canvas.create_line(x, height - tick, x, height, width=2, fill=line)
+        if upward:
+            y = height - at
+            canvas.create_line(0, y, tick, y, width=2, fill=line)
+            canvas.create_line(width - tick, y, width, y, width=2, fill=line)
+        else:
+            canvas.create_line(at, 0, at, tick, width=2, fill=line)
+            canvas.create_line(at, height - tick, at, height, width=2,
+                               fill=line)
     if text:
         cx, cy = width // 2, height // 2
         font = ("Segoe UI", 7, "bold")
+        angle = 90 if upward else 0
         for dx, dy in ((-1, 0), (1, 0), (0, -1), (0, 1),
                        (-1, -1), (1, 1), (-1, 1), (1, -1)):
             canvas.create_text(cx + dx, cy + dy, text=text, fill="#101114",
-                               font=font)
-        canvas.create_text(cx, cy, text=text, fill="#ffffff", font=font)
+                               font=font, angle=angle)
+        canvas.create_text(cx, cy, text=text, fill="#ffffff", font=font,
+                           angle=angle)
+
+
+def send_feedback(comment, details):
+    """Post a comment and the details (where the user is) to the feedback
+    Google Form. Returns None when it went through, else a short error."""
+    import urllib.parse
+    form, comment_field, details_field = FEEDBACK_FORM
+    body = urllib.parse.urlencode({comment_field: comment[:4000],
+                                   details_field: details[:20000]}).encode()
+    req = urllib.request.Request(
+        f"https://docs.google.com/forms/d/e/{form}/formResponse", data=body,
+        headers={"User-Agent": "PokeMmoHelper",
+                 "Content-Type": "application/x-www-form-urlencoded"})
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return None if resp.status == 200 else f"HTTP {resp.status}"
+    except urllib.error.HTTPError as e:
+        return f"HTTP {e.code}"
+    except Exception as e:
+        return "no connection" if isinstance(e, urllib.error.URLError) \
+            else type(e).__name__
+
+
+def open_feedback(app, details):
+    """The feedback window: a comment box, a preview of `details` (sent
+    along with it), Send and Cancel. Only one is open at a time."""
+    old = getattr(app, "feedback_win", None)
+    if old is not None and old.winfo_exists():
+        old.lift()                  # only one at a time
+        old.focus_force()
+        return
+    win = app.feedback_win = tk.Toplevel(app.root, bg=BG)
+    win.title("Send feedback")
+    win.transient(app.root)   # stays above the overlay
+    win.attributes("-topmost", True)
+    win.resizable(False, False)
+    tk.Label(win, text="What's wrong, or what could be better?", bg=BG,
+             fg=FG, font=("Segoe UI", 9, "bold")).pack(
+        anchor="w", padx=10, pady=(10, 2))
+    comment = tk.Text(win, width=48, height=6, bg=BAR, fg=FG, bd=0,
+                      insertbackground=FG, wrap="word",
+                      font=("Segoe UI", 9), padx=6, pady=4)
+    comment.pack(padx=10, fill="x")
+    comment.focus_set()
+    tk.Label(win, text="Also sent (no personal info):", bg=BG, fg=DIM,
+             font=("Segoe UI", 8)).pack(anchor="w", padx=10, pady=(8, 2))
+    preview = tk.Text(win, width=48, height=7, bg=BAR, fg=DIM, bd=0,
+                      wrap="word", font=("Segoe UI", 8), padx=6, pady=4)
+    preview.insert("1.0", details)
+    preview.config(state="disabled")
+    preview.pack(padx=10, fill="x")
+    row = tk.Frame(win, bg=BG)
+    row.pack(fill="x", padx=10, pady=10)
+    status = tk.Label(row, text="", bg=BG, fg=DIM, font=("Segoe UI", 8))
+    status.pack(side="left")
+
+    def done(error):
+        if error:
+            status.config(text=f"Couldn't send: {error}", fg=RED)
+            sending[0] = False
+        else:
+            status.config(text="Sent, thanks!", fg=CHECK_GREEN)
+            win.after(1500, win.destroy)
+
+    sending = [False]
+
+    def send():
+        text = comment.get("1.0", "end").strip()
+        if not text:
+            status.config(text="Type a comment first.", fg=AMBER)
+            return
+        if sending[0]:
+            return
+        sending[0] = True
+        status.config(text="Sending…", fg=DIM)
+        # the thread only fills the queue; Tk is touched from here
+        result = queue.Queue()
+        threading.Thread(
+            target=lambda: result.put(send_feedback(text, details)),
+            daemon=True).start()
+
+        def wait():
+            if not win.winfo_exists():
+                return              # closed while sending
+            try:
+                done(result.get_nowait())
+            except queue.Empty:
+                win.after(200, wait)
+        win.after(200, wait)
+
+    for text, command, fg in (("Cancel", win.destroy, DIM),
+                              ("Send", send, ACCENT)):
+        frame = tk.Frame(row, bg=BUTTON_BORDER)
+        flat_button(frame, text, command, BAR, fg, HOVER,
+                    font=("Segoe UI", 9, "bold"), padx=10,
+                    pady=2).pack(padx=1, pady=1)
+        frame.pack(side="right", padx=(6, 0))
+    win.update_idletasks()
+    x = app.root.winfo_rootx() + 20
+    y = app.root.winfo_rooty() + 60
+    win.geometry(f"+{x}+{y}")
+
+
+def feedback_bar(parent, app, details):
+    """A full-width bordered "Send Feedback" bar; `details()` says what is
+    sent along with the comment."""
+    frame = tk.Frame(parent, bg=BUTTON_BORDER)
+    flat_button(frame, "✎  Send Feedback",
+                lambda: open_feedback(app, details()), BAR, DIM, HOVER, FG,
+                font=("Segoe UI", 8), pady=2).pack(fill="x", padx=1, pady=1)
+    return frame

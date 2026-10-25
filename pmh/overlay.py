@@ -234,6 +234,13 @@ class Overlay:
         self.vbar = tk.Canvas(self.content, width=10, bg=BAR,
                               highlightthickness=0, bd=0)
         self.vbar.pack(side="right", fill="y")
+        # Berry progress bar up the left side, filling upwards. Shown by
+        # place_berry_bar only while berries are planted. It sits beside
+        # the page dropdown (not under it), so opening that doesn't move it.
+        self.title_bar = tk.Canvas(self.main_frame, width=16, bg=TRACK,
+                                   highlightthickness=0, bd=0)
+        self.title_bar_shown = False
+        self.title_bar.bind("<Configure>", self.redraw_berry_bar)
         self.canvas = tk.Canvas(self.content, bg=BG, highlightthickness=0,
                                 bd=0, yscrollincrement=20)
         self.canvas.pack(side="left", fill="both", expand=True)
@@ -460,18 +467,14 @@ class Overlay:
                                     cursor="hand2", padx=4)
         self.pin_button.pack(side="right")
         self.update_pin_button()
-        # Berry progress bar beside the page title, plus a water-drop alert.
-        # Packed by update_title_progress only while berries are planted.
-        self.title_bar = tk.Canvas(self.bar_frame, width=90, height=14,
-                                   bg=TRACK, highlightthickness=0, bd=0)
-        self.title_bar_shown = False
+        # Water-drop alert beside the page title (the berry bar itself runs
+        # up the left side, see build_main).
         self.drop_image = tk.PhotoImage(data=DROP_PNG)
         self.alert_label = tk.Label(self.bar_frame, image=self.drop_image,
                                     bg=BAR)
         self.alert_shown = False
-        for widget in (self.title_bar, self.alert_label):
-            widget.bind("<ButtonPress-1>", self.start_drag)
-            widget.bind("<B1-Motion>", self.drag)
+        self.alert_label.bind("<ButtonPress-1>", self.start_drag)
+        self.alert_label.bind("<B1-Motion>", self.drag)
         # The title both opens the page dropdown (a click) and drags the
         # window (a drag, while unpinned).
         self.bar_frame.bind("<ButtonPress-1>", self.start_drag)
@@ -533,7 +536,10 @@ class Overlay:
                         r.config(bg=HOVER), l.config(bg=HOVER)))
                     widget.bind("<Leave>", lambda e, r=row, l=label: (
                         r.config(bg=BAR), l.config(bg=BAR)))
-        self.page_menu.pack(fill="x", after=self.accent_strip)
+        # beside the berry bar when it shows, so the bar doesn't move
+        self.page_menu.pack(fill="x", after=(
+            self.title_bar if self.title_bar.winfo_manager()
+            else self.accent_strip))
         self.page_menu_open = True
 
     def hide_page_menu(self):
@@ -599,6 +605,11 @@ class Overlay:
             self.wrap_labels = []
             self.guides = []
             self.berry_view = None
+            # every page starts with a "Send Feedback" bar
+            feedback_bar(frame, self, lambda name=self.page_name,
+                         tasks=self.tasks, vars=self.vars, guides=self.guides:
+                         self.page_details(name, tasks, vars, guides)
+                         ).pack(fill="x", pady=(0, 6))
             if self.page_type == "berries":
                 self.berry_view = BerryView(self, frame)
             for task in self.tasks:
@@ -621,6 +632,26 @@ class Overlay:
         self.refresh_view()
         if self.berry_view is not None:
             self.berry_view.update()
+
+    def page_details(self, page_name, tasks, vars, guides):
+        """What is sent along with a feedback comment: the planted berries,
+        the open guides (where the user is in each), or the ticks."""
+        if self.page_type == "berries" and self.berry_view is not None:
+            return self.berry_view.feedback_details()
+        if guides:
+            open_ones = [g.feedback_details() for g in guides
+                         if g.rendered and g.group is not None]
+            return ("\n\n".join(open_ones) if open_ones else
+                    f"Version: {VERSION}\nPage: {page_name} (no guide open)")
+        lines = [f"Version: {VERSION}", f"Page: {page_name}"]
+        for task in tasks:
+            items = task.get("items") or []
+            done = [i.get("name", "?") for i in items
+                    if vars.get(child_key(page_name, task, i)) is not None
+                    and vars[child_key(page_name, task, i)].get()]
+            lines.append(f"{task['name']}: {len(done)}/{len(items)} done"
+                         + (f" ({', '.join(done)})" if done else ""))
+        return "\n".join(lines)
 
     def build_task(self, task):
         name, items = task["name"], task["items"]
@@ -974,8 +1005,21 @@ class Overlay:
             parts.append(f"{ready} ready")
         return " \u00b7 ".join(parts)
 
+    def place_berry_bar(self):
+        """Show the berry bar (berries planted, window not collapsed): down
+        the left side from the title bar to the bottom strip."""
+        if self.title_bar_shown and not self.collapsed:
+            self.title_bar.pack(side="left", fill="y", after=self.bottom)
+        else:
+            self.title_bar.pack_forget()
+
+    def redraw_berry_bar(self, _event=None):
+        """The bar changed size (window resized): paint it again."""
+        self._title_state = None
+        self.update_title_progress()
+
     def update_title_progress(self):
-        """The berry bar beside the page title (shown on every page) and the
+        """The berry bar up the left side (shown on every page) and the
         water alert."""
         stats = self.berry_stats()
         notches = ()
@@ -997,15 +1041,11 @@ class Overlay:
         if state == self._title_state:
             return
         self._title_state = state
-        if stats and not self.title_bar_shown:
-            self.title_bar.pack(side="left", padx=(4, 0),
-                                after=self.title_label)
-            self.title_bar_shown = True
-        elif not stats and self.title_bar_shown:
-            self.title_bar.pack_forget()
-            self.title_bar_shown = False
-        draw_bar(self.title_bar, fraction, color, text, default_w=90,
-                 default_h=14, notches=notches)
+        if bool(stats) != self.title_bar_shown:
+            self.title_bar_shown = bool(stats)
+            self.place_berry_bar()
+        draw_bar(self.title_bar, fraction, color, text, default_w=16,
+                 default_h=200, notches=notches, upward=True)
         if alert and not self.alert_shown:
             self.alert_label.pack(side="left", padx=(6, 0))
             self.alert_shown = True
@@ -1155,6 +1195,7 @@ class Overlay:
         else:
             self.bottom.pack(side="bottom", fill="x")
             self.content.pack(side="top", fill="both", expand=True)
+        self.place_berry_bar()
         self.apply_size()
         self.root.geometry(f"+{x}+{y}")
         self._last_pos = None

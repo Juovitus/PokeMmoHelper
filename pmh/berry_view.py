@@ -31,6 +31,19 @@ class BerryView:
         self.build_chips()
         self.rebuild()
 
+    def feedback_details(self):
+        """The planted berries, sent along with a feedback comment."""
+        lines = [f"Version: {VERSION}", "Page: Berry Planter",
+                 f"Plants ({len(self.app.berry_plants)}):"]
+        now = time.time()
+        for plant in self.app.berry_plants:
+            info = berry_info(plant["berry"], self.app.config)
+            st = plant_status(plant, info, now)
+            ready = ("ready" if st["state"] == "ready"
+                     else f"ready in {fmt_duration(st['ready_in'])}")
+            lines.append(f"  {plant['berry']}: {ready}")
+        return "\n".join(lines)
+
     # -- planting picker
     def update_plant_button(self):
         self.plant_button.config(
