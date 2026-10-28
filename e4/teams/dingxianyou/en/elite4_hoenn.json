@@ -14552,33 +14552,22 @@
     {
      "kind": "action",
      "text": "KO Abomasnow"
-    },
-    {
-     "kind": "action",
-     "text": "→ Jolteon comes out"
-    },
-    {
-     "kind": "action",
-     "text": "Use X Sp. Atk (+2 Sp.Atk)"
-    },
-    {
-     "kind": "warning",
-     "text": "Needs confirmation"
-    },
-    {
-     "kind": "action",
-     "text": "Use X Speed (+2 Speed)"
-    },
-    {
-     "kind": "warning",
-     "text": "Needs confirmation"
-    },
-    {
-     "kind": "action",
-     "text": "Keep sweeping with Volcarona"
     }
    ],
-   "branch": null
+   "branch": {
+    "kind": "choice",
+    "prompt": "What does the opponent send out next?",
+    "options": [
+     {
+      "label": "Jolteon",
+      "nodeId": "n8_mo5qn4ml_ok_jolt"
+     },
+     {
+      "label": "Empoleon",
+      "nodeId": "n8_mo5qn4ml_ok_emp"
+     }
+    ]
+   }
   },
   "n10_mmk208al_ok": {
    "steps": [
@@ -14858,6 +14847,56 @@
     {
      "kind": "note",
      "text": "Drain Punch Ampharos"
+    }
+   ],
+   "branch": null
+  },
+  "n8_mo5qn4ml_ok_jolt": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Use X Sp. Atk (+2 Sp.Atk)"
+    },
+    {
+     "kind": "warning",
+     "text": "Needs confirmation"
+    },
+    {
+     "kind": "action",
+     "text": "Use X Speed (+2 Speed)"
+    },
+    {
+     "kind": "warning",
+     "text": "Needs confirmation"
+    },
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Volcarona"
+    }
+   ],
+   "branch": null
+  },
+  "n8_mo5qn4ml_ok_emp": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Switch to Slowbro"
+    },
+    {
+     "kind": "action",
+     "text": "Slowbro uses Yawn"
+    },
+    {
+     "kind": "action",
+     "text": "Sacrifice Politoed"
+    },
+    {
+     "kind": "action",
+     "text": "Poliwrath Belly Drum (+6 Atk)"
+    },
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Poliwrath"
     }
    ],
    "branch": null

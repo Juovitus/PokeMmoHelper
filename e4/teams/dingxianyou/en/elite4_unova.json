@@ -2477,6 +2477,10 @@
     {
      "kind": "action",
      "text": "Use X Accuracy (+Accuracy) （ (no Encore needed) ）"
+    },
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Gengar"
     }
    ],
    "branch": null
@@ -3109,23 +3113,32 @@
   "n11_mnvrc466": {
    "steps": [
     {
-     "kind": "action",
-     "text": "see"
-    },
-    {
-     "kind": "action",
-     "text": "no Topofocus Blast"
-    },
-    {
-     "kind": "action",
-     "text": "Stays on the field (no switch)"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 7"
+    },
+    {
+     "kind": "note",
+     "text": "This Chandelure is Zoroark (Illusion): it used Focus Blast and didn't switch"
+    },
+    {
+     "kind": "action",
+     "text": "Switch to Gengar"
     }
    ],
-   "branch": null
+   "branch": {
+    "kind": "choice",
+    "prompt": "Did the opponent switch?",
+    "options": [
+     {
+      "label": "Didn't Switch",
+      "nodeId": "n11_mo49osli"
+     },
+     {
+      "label": "Dragonite",
+      "nodeId": "n11_mo49ospo"
+     }
+    ]
+   }
   },
   "n11_mnlbhyae": {
    "steps": [
@@ -14867,23 +14880,28 @@
   "n14_mmih5fee": {
    "steps": [
     {
-     "kind": "action",
-     "text": "Encore, then +4 Sp.Atk"
-    },
-    {
-     "kind": "action",
-     "text": "Encore again, then Nasty Plot (+6 Sp.Atk), then use X Accuracy (+Accuracy)"
-    },
-    {
-     "kind": "action",
-     "text": "Keep sweeping with Gengar"
-    },
-    {
      "kind": "setup",
      "text": "Opponent is using team 6"
+    },
+    {
+     "kind": "action",
+     "text": "Encore, then +4 Sp.Atk"
     }
    ],
-   "branch": null
+   "branch": {
+    "kind": "choice",
+    "prompt": "Did the opponent switch?",
+    "options": [
+     {
+      "label": "Didn't Switch",
+      "nodeId": "n14_mmih5fee_stay"
+     },
+     {
+      "label": "Switched to Gyarados",
+      "nodeId": "n14_mmih5fee_gyara"
+     }
+    ]
+   }
   },
   "n14_mmiha01y": {
    "steps": [
@@ -18446,6 +18464,44 @@
   },
   "n14_mm3qhcfr_ok": {
    "steps": [],
+   "branch": null
+  },
+  "n14_mmih5fee_stay": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Encore again, then Nasty Plot (+6 Sp.Atk), then use X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Gengar"
+    }
+   ],
+   "branch": null
+  },
+  "n14_mmih5fee_gyara": {
+   "steps": [
+    {
+     "kind": "action",
+     "text": "Switch to Slowbro"
+    },
+    {
+     "kind": "action",
+     "text": "Slowbro uses Yawn"
+    },
+    {
+     "kind": "action",
+     "text": "Sacrifice Politoed"
+    },
+    {
+     "kind": "action",
+     "text": "Poliwrath Belly Drum (+6 Atk)"
+    },
+    {
+     "kind": "action",
+     "text": "Keep sweeping with Poliwrath"
+    }
+   ],
    "branch": null
   }
  }
