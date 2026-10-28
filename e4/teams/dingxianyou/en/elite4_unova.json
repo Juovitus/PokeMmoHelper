@@ -2397,11 +2397,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed)"
-    },
-    {
-     "kind": "action",
-     "text": "Use X Accuracy (+Accuracy) （ (no Encore needed) ）"
+     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
     }
    ],
    "branch": null
@@ -2472,11 +2468,7 @@
     },
     {
      "kind": "action",
-     "text": "Encore again, then use X Speed (+2 Speed)"
-    },
-    {
-     "kind": "action",
-     "text": "Use X Accuracy (+Accuracy) （ (no Encore needed) ）"
+     "text": "Encore again, then use X Speed (+2 Speed) and X Accuracy (+Accuracy)"
     },
     {
      "kind": "action",
@@ -6508,6 +6500,10 @@
     },
     {
      "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
+    },
+    {
+     "kind": "action",
      "text": "Keep sweeping with Gengar"
     },
     {
@@ -7067,6 +7063,10 @@
     {
      "kind": "action",
      "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
@@ -7833,6 +7833,10 @@
     {
      "kind": "action",
      "text": "Encore, then +2 Sp.Atk, then use X Accuracy (+Accuracy)"
+    },
+    {
+     "kind": "action",
+     "text": "Encore again (Possible Focus Sash)"
     },
     {
      "kind": "action",
